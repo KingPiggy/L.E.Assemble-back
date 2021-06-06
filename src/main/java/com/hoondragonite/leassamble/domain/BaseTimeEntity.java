@@ -1,4 +1,4 @@
-package com.hoondragonite.samplejpaproject.domain;
+package com.hoondragonite.leassamble.domain;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;

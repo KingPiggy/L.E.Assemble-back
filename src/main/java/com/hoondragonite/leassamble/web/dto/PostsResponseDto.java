@@ -1,6 +1,6 @@
-package com.hoondragonite.samplejpaproject.web.dto;
+package com.hoondragonite.leassamble.web.dto;
 
-import com.hoondragonite.samplejpaproject.domain.posts.Posts;
+import com.hoondragonite.leassamble.domain.posts.Posts;
 import lombok.Getter;
 
 @Getter

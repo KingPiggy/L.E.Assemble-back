@@ -1,6 +1,6 @@
-package com.hoondragonite.samplejpaproject.domain.posts;
+package com.hoondragonite.leassamble.domain.posts;
 
-import com.hoondragonite.samplejpaproject.domain.BaseTimeEntity;
+import com.hoondragonite.leassamble.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

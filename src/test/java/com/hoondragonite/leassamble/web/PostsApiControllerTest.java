@@ -1,9 +1,12 @@
-package com.hoondragonite.samplejpaproject.web;
+package com.hoondragonite.leassamble.web;
 
-import com.hoondragonite.samplejpaproject.domain.posts.Posts;
-import com.hoondragonite.samplejpaproject.domain.posts.PostsRepository;
-import com.hoondragonite.samplejpaproject.web.dto.PostsSaveRequestDto;
-import com.hoondragonite.samplejpaproject.web.dto.PostsUpdateRequestDto;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import com.hoondragonite.leassamble.domain.posts.Posts;
+import com.hoondragonite.leassamble.domain.posts.PostsRepository;
+import com.hoondragonite.leassamble.web.dto.PostsSaveRequestDto;
+import com.hoondragonite.leassamble.web.dto.PostsUpdateRequestDto;
+import java.util.List;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,10 +19,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

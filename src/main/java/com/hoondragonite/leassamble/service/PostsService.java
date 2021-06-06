@@ -1,10 +1,10 @@
-package com.hoondragonite.samplejpaproject.service;
+package com.hoondragonite.leassamble.service;
 
-import com.hoondragonite.samplejpaproject.domain.posts.Posts;
-import com.hoondragonite.samplejpaproject.domain.posts.PostsRepository;
-import com.hoondragonite.samplejpaproject.web.dto.PostsResponseDto;
-import com.hoondragonite.samplejpaproject.web.dto.PostsSaveRequestDto;
-import com.hoondragonite.samplejpaproject.web.dto.PostsUpdateRequestDto;
+import com.hoondragonite.leassamble.domain.posts.Posts;
+import com.hoondragonite.leassamble.domain.posts.PostsRepository;
+import com.hoondragonite.leassamble.web.dto.PostsResponseDto;
+import com.hoondragonite.leassamble.web.dto.PostsSaveRequestDto;
+import com.hoondragonite.leassamble.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

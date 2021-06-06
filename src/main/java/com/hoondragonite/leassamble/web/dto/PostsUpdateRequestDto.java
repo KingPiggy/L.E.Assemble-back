@@ -1,4 +1,4 @@
-package com.hoondragonite.samplejpaproject.web.dto;
+package com.hoondragonite.leassamble.web.dto;
 
 import lombok.Builder;
 import lombok.Getter;

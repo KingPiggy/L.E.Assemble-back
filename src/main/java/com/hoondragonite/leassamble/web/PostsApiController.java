@@ -1,11 +1,16 @@
-package com.hoondragonite.samplejpaproject.web;
+package com.hoondragonite.leassamble.web;
 
-import com.hoondragonite.samplejpaproject.service.PostsService;
-import com.hoondragonite.samplejpaproject.web.dto.PostsResponseDto;
-import com.hoondragonite.samplejpaproject.web.dto.PostsSaveRequestDto;
-import com.hoondragonite.samplejpaproject.web.dto.PostsUpdateRequestDto;
+import com.hoondragonite.leassamble.service.PostsService;
+import com.hoondragonite.leassamble.web.dto.PostsResponseDto;
+import com.hoondragonite.leassamble.web.dto.PostsSaveRequestDto;
+import com.hoondragonite.leassamble.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
