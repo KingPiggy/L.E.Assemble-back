@@ -8,18 +8,14 @@
 
 ## 사용기술 및 개발환경
 
-클라이언트 : 리액트 or 타임리프
-서버 : Spring boot 2.5.0
-Build : Gradle
-인프라 : 도커, nginx, 젠킨스
-데이터베이스 : Maria DB, redis
-CI : Jenkins
-CD : Docker
-분산처리 : redis, Nginx
-테스트 도구 : NGrinder
-Code Style : intellij-java-google-style (Ctrl-Alt-L)
-
-브랜치 관리전략
+클라이언트 : 리액트 or 타임리프  
+서버 : Spring boot 2.5.0  
+Build : Gradle  
+인프라 : 도커, nginx, Jenkins, redis  
+데이터베이스 : Maria DB  
+성능 테스트: NGrinder  
+Code Style : intellij-java-google-style (Ctrl-Alt-L)  
+브랜치 관리전략  
 ## ERD
 
 ## Issues
