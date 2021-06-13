@@ -9,15 +9,6 @@ group = 'com.hoondragonite'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
-bootJar {
-    jar.enabled = true // 빌드시 jar 을 실행
-}
-
-jar {
-    manifest { // 빌드시 Main-Class 설정
-        attributes 'Main-Class': 'com.hoondragonite.leassamble.Application'
-    }
-}
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
