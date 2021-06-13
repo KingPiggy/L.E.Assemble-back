@@ -9,12 +9,6 @@ group = 'com.hoondragonite'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
-bootJar {
-    archiveBaseName = 'leassemble'
-    archiveFileName = 'leassemble.jar'
-    archiveVersion = "0.0.0"
-}
-
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
