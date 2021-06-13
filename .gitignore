@@ -39,3 +39,4 @@ out/
 ### Project ###
 application.properties
 /temp-folder
+springboot-app.pid
