@@ -1,0 +1,6 @@
+version: 0.0 # CodeDeploy의 버전
+os: linux
+files:
+  - source:
+      destination: /home/ec2-user/app/back/zip/
+      overwrite: yes
