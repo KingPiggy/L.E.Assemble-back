@@ -10,6 +10,24 @@ branches:
 before_install:
   - chmod +x gradlew
 
+# deploy 명령어가 실행되기 전에 수행되며 CodeDeploy는 Jar 파일을 인식하지 못하므로 Jar+기타 설정 파일들을 모아 압축한다.
+before_deploy:
+  - zip -r leassemble-back * # 현재 위치의 모든 파일을 압축
+  - mkdir -p deploy
+  - mv leassemble-back.zip deploy/leassemble-back.zip
+
+# S3로 파일 업로드 혹은 CodeDeploy로 배포 등 외부 서비스와 연동될 행위들을 선언한다.
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
+    secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된  값
+    bucket: leassemble-file-bucket	 # S3 버킷
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: private # zip 파일 접근을 private으로
+    local_dir: deploy # before_deploy에서 생성한 디렉토리
+    wait-until-deploy: true
+
 # Travis CI 서버의 Home
 cache:
   directories:
