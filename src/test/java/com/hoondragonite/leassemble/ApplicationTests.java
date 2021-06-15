@@ -1,4 +1,4 @@
-package com.hoondragonite.leassamble;
+package com.hoondragonite.leassemble;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

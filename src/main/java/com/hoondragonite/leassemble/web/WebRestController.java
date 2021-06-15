@@ -1,4 +1,4 @@
-package com.hoondragonite.leassamble.web;
+package com.hoondragonite.leassemble.web;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;

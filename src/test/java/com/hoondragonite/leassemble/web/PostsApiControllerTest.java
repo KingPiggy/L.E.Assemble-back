@@ -1,11 +1,11 @@
-package com.hoondragonite.leassamble.web;
+package com.hoondragonite.leassemble.web;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.hoondragonite.leassamble.domain.posts.Posts;
-import com.hoondragonite.leassamble.domain.posts.PostsRepository;
-import com.hoondragonite.leassamble.web.dto.PostsSaveRequestDto;
-import com.hoondragonite.leassamble.web.dto.PostsUpdateRequestDto;
+import com.hoondragonite.leassemble.domain.posts.Posts;
+import com.hoondragonite.leassemble.domain.posts.PostsRepository;
+import com.hoondragonite.leassemble.web.dto.PostsSaveRequestDto;
+import com.hoondragonite.leassemble.web.dto.PostsUpdateRequestDto;
 import java.util.List;
 import org.junit.After;
 import org.junit.Test;

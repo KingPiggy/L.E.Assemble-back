@@ -1,4 +1,4 @@
-package com.hoondragonite.leassamble.config;
+package com.hoondragonite.leassemble.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

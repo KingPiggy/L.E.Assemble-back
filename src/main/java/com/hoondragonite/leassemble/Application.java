@@ -1,4 +1,4 @@
-package com.hoondragonite.leassamble;
+package com.hoondragonite.leassemble;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

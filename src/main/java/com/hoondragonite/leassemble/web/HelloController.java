@@ -1,6 +1,6 @@
-package com.hoondragonite.leassamble.web;
+package com.hoondragonite.leassemble.web;
 
-import com.hoondragonite.leassamble.web.dto.HelloResponseDto;
+import com.hoondragonite.leassemble.web.dto.HelloResponseDto;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

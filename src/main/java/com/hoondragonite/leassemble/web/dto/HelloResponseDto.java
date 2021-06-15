@@ -1,4 +1,4 @@
-package com.hoondragonite.leassamble.web.dto;
+package com.hoondragonite.leassemble.web.dto;
 
 
 import lombok.Getter;

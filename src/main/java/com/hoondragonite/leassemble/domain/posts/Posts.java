@@ -1,6 +1,6 @@
-package com.hoondragonite.leassamble.domain.posts;
+package com.hoondragonite.leassemble.domain.posts;
 
-import com.hoondragonite.leassamble.domain.BaseTimeEntity;
+import com.hoondragonite.leassemble.domain.BaseTimeEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

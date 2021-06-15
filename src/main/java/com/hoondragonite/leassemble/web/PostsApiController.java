@@ -1,9 +1,9 @@
-package com.hoondragonite.leassamble.web;
+package com.hoondragonite.leassemble.web;
 
-import com.hoondragonite.leassamble.service.PostsService;
-import com.hoondragonite.leassamble.web.dto.PostsResponseDto;
-import com.hoondragonite.leassamble.web.dto.PostsSaveRequestDto;
-import com.hoondragonite.leassamble.web.dto.PostsUpdateRequestDto;
+import com.hoondragonite.leassemble.service.PostsService;
+import com.hoondragonite.leassemble.web.dto.PostsResponseDto;
+import com.hoondragonite.leassemble.web.dto.PostsSaveRequestDto;
+import com.hoondragonite.leassemble.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

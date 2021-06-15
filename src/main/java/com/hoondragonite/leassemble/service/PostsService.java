@@ -1,10 +1,10 @@
-package com.hoondragonite.leassamble.service;
+package com.hoondragonite.leassemble.service;
 
-import com.hoondragonite.leassamble.domain.posts.Posts;
-import com.hoondragonite.leassamble.domain.posts.PostsRepository;
-import com.hoondragonite.leassamble.web.dto.PostsResponseDto;
-import com.hoondragonite.leassamble.web.dto.PostsSaveRequestDto;
-import com.hoondragonite.leassamble.web.dto.PostsUpdateRequestDto;
+import com.hoondragonite.leassemble.domain.posts.Posts;
+import com.hoondragonite.leassemble.domain.posts.PostsRepository;
+import com.hoondragonite.leassemble.web.dto.PostsResponseDto;
+import com.hoondragonite.leassemble.web.dto.PostsSaveRequestDto;
+import com.hoondragonite.leassemble.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

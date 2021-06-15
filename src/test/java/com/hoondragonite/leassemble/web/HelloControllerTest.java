@@ -1,4 +1,4 @@
-package com.hoondragonite.leassamble.web;
+package com.hoondragonite.leassemble.web;
 
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

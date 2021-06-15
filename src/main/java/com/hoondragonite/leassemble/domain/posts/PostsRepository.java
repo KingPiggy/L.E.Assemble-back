@@ -1,4 +1,4 @@
-package com.hoondragonite.leassamble.domain.posts;
+package com.hoondragonite.leassemble.domain.posts;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

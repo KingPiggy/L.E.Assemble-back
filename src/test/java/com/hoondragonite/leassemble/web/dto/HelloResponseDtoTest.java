@@ -1,8 +1,8 @@
-package com.hoondragonite.leassamble.web.dto;
-
-import org.junit.Test;
+package com.hoondragonite.leassemble.web.dto;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.Test;
 
 public class HelloResponseDtoTest {
 

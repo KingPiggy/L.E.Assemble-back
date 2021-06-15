@@ -1,4 +1,4 @@
-package com.hoondragonite.leassamble.domain.posts;
+package com.hoondragonite.leassemble.domain.posts;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
