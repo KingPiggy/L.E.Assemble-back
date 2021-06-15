@@ -14,7 +14,7 @@ before_install:
 before_deploy:
   - zip -r leassemble-back * # 현재 위치의 모든 파일을 압축.
   - mkdir -p deploy
-  - mv L.E.Assemble-back.zip deploy/leassemble-back.zip
+  - mv leassemble-back.zip deploy/leassemble-back.zip
 
 # S3로 파일 업로드 혹은 CodeDeploy로 배포 등 외부 서비스와 연동될 행위들을 선언한다.
 deploy:
