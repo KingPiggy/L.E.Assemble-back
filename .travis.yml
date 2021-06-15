@@ -12,9 +12,9 @@ before_install:
 
 # deploy 명령어가 실행되기 전에 수행되며 CodeDeploy는 Jar 파일을 인식하지 못하므로 Jar+기타 설정 파일들을 모아 압축한다.
 before_deploy:
-  - zip -r L.E.Assemble-back * # 현재 위치의 모든 파일을 압축.
+  - zip -r leassemble-back * # 현재 위치의 모든 파일을 압축.
   - mkdir -p deploy
-  - mv L.E.Assemble-back.zip deploy/L.E.Assemble-back.zip
+  - mv L.E.Assemble-back.zip deploy/leassemble-back.zip
 
 # S3로 파일 업로드 혹은 CodeDeploy로 배포 등 외부 서비스와 연동될 행위들을 선언한다.
 deploy:
@@ -32,7 +32,7 @@ deploy:
     access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
     secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된  값
     bucket: leassemble-bucket # S3 버킷
-    key: L.E.Assemble-back.zip # 빌드 파일을 압축해서 전달
+    key: leassemble-back.zip # 빌드 파일을 압축해서 전달
     bundle_type: zip
     application: leassemble # 웹 콘솔에서 등록한 CodeDeploy 애플리케이션
     deployment_group: leassemble-group # 웹 콘솔에서 등록한 CodeDeploy 배포 그룹
