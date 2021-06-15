@@ -1,6 +1,6 @@
 version: 0.0 # CodeDeploy의 버전
 os: linux
 files:
-  - source:
+  - source: /
       destination: /home/ec2-user/app/zip/ # 전달 받은 zip 파일을 이 경로에 옮김
       overwrite: yes
