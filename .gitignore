@@ -39,3 +39,7 @@ out/
 ### Project ###
 /temp-folder
 springboot-app.pid
+
+### Config ###
+application-oauth.properties
+application-real-db.properties
