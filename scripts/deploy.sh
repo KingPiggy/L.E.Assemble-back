@@ -30,3 +30,4 @@ nohup java -jar \
     -Dspring.config.location=classpath:/application.properties,classpath:/application-real.properties,/home/ec2-user/app/application-oauth.properties,/home/ec2-user/app/application-real-db.properties \
     -Dspring.profiles.active=real \
     $REPOSITORY/$JAR_NAME 2>&1 &
+echo ""
