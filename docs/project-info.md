@@ -1,4 +1,4 @@
-# L.E. Assamble Project Information
+# L.E. Assemble Project Information
 
 ## 내용
 - 프로젝트 개요

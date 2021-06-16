@@ -1,4 +1,4 @@
-# L.E. Assamble Usecase
+# L.E. Assemble Usecase
 
 ## ✅ 사용자
 - L.E. Assamble의 서비스 이용을 위해 사용자로 회원가입을 한다.

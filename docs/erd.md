@@ -1,2 +1,2 @@
-# L.E. Assamble ERD
+# L.E. Assemble ERD
 

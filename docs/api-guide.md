@@ -1,1 +1,1 @@
-# L.E. Assamble REST API Guide
+# L.E. Assemble REST API Guide
