@@ -13,16 +13,11 @@ public class ProfileController {
 
     private final Environment env;
 
-    @GetMapping("/profile")
+    @GetMapping("/api/profile")
     public String profile() {
         List<String> profiles = Arrays.asList(env.getActiveProfiles());
         List<String> realProfiles = Arrays.asList("real", "real1", "real2");
         String defaultProfile = profiles.isEmpty() ? "default" : profiles.get(0);
-
-        for(String s : profiles){
-            System.out.println("hoon: " + s);
-        }
-        System.out.println("hoon de: " + defaultProfile);
 
         return profiles.stream().filter(realProfiles::contains).findAny().orElse(defaultProfile);
     }
