@@ -6,9 +6,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
+
+    private final long MAX_AGE_SECS = 3600;
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**").allowCredentials(true)
-            .allowedOrigins("http://localhost:3000");
+        registry.addMapping("/**").allowCredentials(true)
+            //.allowedOrigins("*")
+            .allowedOrigins("/api/*")
+            .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
+            .allowedHeaders("*")
+            .allowCredentials(true)
+            .maxAge(MAX_AGE_SECS);
     }
 }

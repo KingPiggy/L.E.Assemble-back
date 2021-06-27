@@ -42,4 +42,5 @@ springboot-app.pid
 
 ### Config ###
 application-oauth.properties
+application-db.properties
 application-real-db.properties
