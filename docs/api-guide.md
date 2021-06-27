@@ -40,3 +40,7 @@ GET : /api/users/{user_id}/orders
 GET : /api/users/{user_id}/orders/{order_id}
 POST : /api/users/{user_id}/orders
 DELETE : /api/users/{user_id}/orders/{order_id}
+
+## login
+/oauth2/callback/{서비스코드}
+/oauth2/callback/google
