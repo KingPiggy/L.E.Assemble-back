@@ -8,8 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class WebRestController {
 
-    @PostMapping("/api/frontTest")
-    public ResponseEntity<String> frontTest(HttpServletRequest request) {
-        return ResponseEntity.ok("안녕, 친구!");
+    @PostMapping("/api/port-test1")
+    public ResponseEntity<String> portTest1(HttpServletRequest request) {
+        return ResponseEntity.ok("8081 테스트");
+    }
+    @PostMapping("/api/port-test2")
+    public ResponseEntity<String> portTest2(HttpServletRequest request) {
+        return ResponseEntity.ok("8082 테스트");
     }
 }
