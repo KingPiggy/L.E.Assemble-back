@@ -15,4 +15,11 @@ public class WebRestController {
         String test = "hi";
         return ResponseEntity.ok("받은 값 :" + test);
     }
+
+    @GetMapping("/oauth2/test")
+    public String oauth2Test(HttpServletRequest request) {
+
+        return "Hi";
+    }
+
 }
