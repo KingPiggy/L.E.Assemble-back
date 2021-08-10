@@ -7,12 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloController {
-    
-    // 테스트용
-    @GetMapping("/")
-    public String index(){
-        return "index";
-    }
 
     @GetMapping("/hello")
     public String hello() {
