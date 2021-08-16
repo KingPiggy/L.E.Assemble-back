@@ -1,53 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta name="description" content=""/>
-  <meta name="author" content=""/>
-  <title>L.E.Assemble</title>
-  <!-- Favicon-->
-  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-  <!-- Bootstrap icons-->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" integrity="sha384-tKLJeE1ALTUwtXlaGjJYM3sejfssWdAaWR2s97axw4xkiAdMzQjtOjgcyw0Y50KU" crossorigin="anonymous">
-  <!-- FontAwesome -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="sha384-wESLQ85D6gbsF459vf1CiZ2+rr+CsxRY0RpiF1tLlQpDnAgg6rwdsUF1+Ics2bni" crossorigin="anonymous">
-  <link href="/css/styles.css" rel="stylesheet" />
-</head>
-<body class="d-flex flex-column">
-<main class="flex-shrink-0">
-  <!-- Navigation-->
-  {{>layout/header}}
-  <!-- Content-->
-  <section class="py-5">
-    <div class="container px-5 my-5">
-      {{#userName}}
-        <span id="user">{{userName}}</span>
-        <a href="/logout" class="btn btn-info active" role="button">로그아웃</a>
-      {{/userName}}
-      <ul>
-        <li>
-          {{^userName}}
-            <a href="/oauth2/authorization/google" class="btn" role="button">구글 로그인</a>
-          {{/userName}}
-        </li>
-        <li>
-          {{^userName}}
-            <a href="/oauth2/authorization/kakao" class="btn" role="button">카카오 로그인</a>
-          {{/userName}}
-        </li>
-      </ul>
-    </div>
-  </section>
+<!-- Navigation-->
+{{>layout/header}}
+<!-- Content-->
+<section class="py-5">
+  <div class="container px-5 my-5">
+    {{#userName}}
+      <span id="user">{{userName}}</span>
+      <a href="/logout" class="btn btn-info active" role="button">로그아웃</a>
+    {{/userName}}
+    <ul>
+      <li>
+        {{^userName}}
+          <a href="/oauth2/authorization/google" class="btn" role="button">구글 로그인</a>
+        {{/userName}}
+      </li>
+      <li>
+        {{^userName}}
+          <a href="/oauth2/authorization/kakao" class="btn" role="button">카카오 로그인</a>
+        {{/userName}}
+      </li>
+    </ul>
+  </div>
+</section>
 </main>
 <!-- Footer-->
 {{>layout/footer}}
-<!-- Bootstrap JS-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script><!-- Core theme JS-->
-<script src="/js/scripts.js"></script>
-
-</body>
-</html>

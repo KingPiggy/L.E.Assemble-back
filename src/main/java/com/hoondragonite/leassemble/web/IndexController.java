@@ -24,16 +24,6 @@ public class IndexController {
         return "about";
     }
 
-    @GetMapping("/test")
-    public String test() {
-        return "test";
-    }
-
-    @GetMapping("/test2")
-    public String test2() {
-        return "test2";
-    }
-
     @GetMapping("/mylogin")
     public String myLogin() {
         return "mylogin";
