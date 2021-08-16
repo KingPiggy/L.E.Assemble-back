@@ -22,5 +22,15 @@ public class ProfileController {
 
         return profiles.stream().filter(realProfiles::contains).findAny().orElse(defaultProfile);
     }
+
+    // 로드밸런싱 확인용
+    @GetMapping("/api/profile")
+    public String apiProfile() {
+        List<String> profiles = Arrays.asList(env.getActiveProfiles());
+        List<String> realProfiles = Arrays.asList("real", "real1", "real2");
+        String defaultProfile = profiles.isEmpty() ? "default" : profiles.get(0);
+
+        return profiles.stream().filter(realProfiles::contains).findAny().orElse(defaultProfile);
+    }
 }
 
