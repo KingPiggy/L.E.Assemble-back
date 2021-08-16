@@ -11,7 +11,6 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
   <![endif]-->
-  <link rel="stylesheet" href="/assets/base.css">
   <link rel="stylesheet" href="/css/fixed-navigation-bar.css">
 </head>
 <body>
@@ -26,6 +25,15 @@
       <li><a href="/test">111</a></li>
       <li><a href="/test2">222</a></li>
     </ul>
+    <span class="menu-item-user">
+      {{#userName}}
+        <span id="user">{{userName}}님</span>
+        <a href="/logout">로그아웃</a>
+      {{/userName}}
+      {{^userName}}
+        <a href="/mylogin">로그인</a>
+      {{/userName}}
+    </span>
   </div>
 </nav>
 </body>
