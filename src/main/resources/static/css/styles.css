@@ -56,3 +56,8 @@ html {
 .menu-item-user{
   float: right;
 }
+
+.my-text-white{
+  color: white;
+  text-align: center;
+}
