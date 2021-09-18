@@ -20,12 +20,22 @@ public class IndexController {
     }
 
     @GetMapping("/about")
-    public String about() {
+    public String about(Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            model.addAttribute("userName", user.getName());
+            model.addAttribute("userImg", user.getPicture());
+        }
+
         return "about";
     }
 
     @GetMapping("/mylogin")
-    public String myLogin() {
+    public String myLogin(Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            model.addAttribute("userName", user.getName());
+            model.addAttribute("userImg", user.getPicture());
+        }
+
         return "mylogin";
     }
 }
