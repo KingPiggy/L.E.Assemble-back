@@ -12,8 +12,8 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
         if(user != null) {
-            model.addAttribute("userName", user.getName());
-            model.addAttribute("userImg", user.getPicture());
+            model.addAttribute("loginUserName", user.getName());
+            model.addAttribute("loginUserImg", user.getPicture());
         }
 
         return "index";
@@ -22,8 +22,8 @@ public class IndexController {
     @GetMapping("/about")
     public String about(Model model, @LoginUser SessionUser user) {
         if(user != null) {
-            model.addAttribute("userName", user.getName());
-            model.addAttribute("userImg", user.getPicture());
+            model.addAttribute("loginUserName", user.getName());
+            model.addAttribute("loginUserImg", user.getPicture());
         }
 
         return "about";
@@ -32,8 +32,8 @@ public class IndexController {
     @GetMapping("/mylogin")
     public String myLogin(Model model, @LoginUser SessionUser user) {
         if(user != null) {
-            model.addAttribute("userName", user.getName());
-            model.addAttribute("userImg", user.getPicture());
+            model.addAttribute("loginUserName", user.getName());
+            model.addAttribute("loginUserImg", user.getPicture());
         }
 
         return "mylogin";
