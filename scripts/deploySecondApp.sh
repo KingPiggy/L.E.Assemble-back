@@ -6,6 +6,8 @@ source ${ABSDIR}/profile.sh
 
 function deploy_second_app()
 {
+  echo "> 두 번째 배포를 시작합니다."
+
   IDLE_PORT=$(find_idle_port)
 
   echo "> $IDLE_PORT 에서 구동중인 애플리케이션 pid 확인"
