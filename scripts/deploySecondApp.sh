@@ -20,6 +20,9 @@ function deploy_second_app()
     sleep 5
   fi
 
+  REPOSITORY=/home/ec2-user/app/back
+  PROJECT_NAME=L.E.Assemble-back
+
   echo "> 두번째 어플리케이션 배포"
   JAR_NAME=$(ls -tr $REPOSITORY/*.jar | tail -n 1)
 
