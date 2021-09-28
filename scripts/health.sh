@@ -4,6 +4,7 @@ ABSPATH=$(readlink -f $0)
 ABSDIR=$(dirname $ABSPATH)
 source ${ABSDIR}/profile.sh
 source ${ABSDIR}/switch.sh
+source ${ABSDIR}/deploySecondApp.sh
 
 IDLE_PORT=$(find_idle_port)
 
@@ -24,6 +25,7 @@ do
   then
     echo "> SUCCESS : Health Check"
     switch_proxy
+    deploy_second_app
     break
   else
     echo "> ERROR : Can't understand Response of Health Check or Doesn't Running"
