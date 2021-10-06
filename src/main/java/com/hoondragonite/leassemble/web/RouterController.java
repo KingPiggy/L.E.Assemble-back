@@ -7,11 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class IndexController {
+public class RouterController {
 
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
-        if(user != null) {
+        if (user != null) {
             model.addAttribute("loginUserName", user.getName());
             model.addAttribute("loginUserImg", user.getPicture());
         }
@@ -19,9 +19,39 @@ public class IndexController {
         return "index";
     }
 
+    @GetMapping("/products")
+    public String products(Model model, @LoginUser SessionUser user) {
+        if (user != null) {
+            model.addAttribute("loginUserName", user.getName());
+            model.addAttribute("loginUserImg", user.getPicture());
+        }
+
+        return "products";
+    }
+
+    @GetMapping("/store")
+    public String store(Model model, @LoginUser SessionUser user) {
+        if (user != null) {
+            model.addAttribute("loginUserName", user.getName());
+            model.addAttribute("loginUserImg", user.getPicture());
+        }
+
+        return "store";
+    }
+
+    @GetMapping("/mypage")
+    public String mypage(Model model, @LoginUser SessionUser user) {
+        if (user != null) {
+            model.addAttribute("loginUserName", user.getName());
+            model.addAttribute("loginUserImg", user.getPicture());
+        }
+
+        return "mypage";
+    }
+
     @GetMapping("/about")
     public String about(Model model, @LoginUser SessionUser user) {
-        if(user != null) {
+        if (user != null) {
             model.addAttribute("loginUserName", user.getName());
             model.addAttribute("loginUserImg", user.getPicture());
         }
@@ -31,7 +61,7 @@ public class IndexController {
 
     @GetMapping("/mylogin")
     public String myLogin(Model model, @LoginUser SessionUser user) {
-        if(user != null) {
+        if (user != null) {
             model.addAttribute("loginUserName", user.getName());
             model.addAttribute("loginUserImg", user.getPicture());
         }
