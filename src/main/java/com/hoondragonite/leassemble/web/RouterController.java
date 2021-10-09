@@ -19,34 +19,34 @@ public class RouterController {
         return "index";
     }
 
-    @GetMapping("/products")
+    @GetMapping("/store-events")
     public String products(Model model, @LoginUser SessionUser user) {
         if (user != null) {
             model.addAttribute("loginUserName", user.getName());
             model.addAttribute("loginUserImg", user.getPicture());
         }
 
-        return "products";
+        return "store-events";
     }
 
-    @GetMapping("/store")
-    public String store(Model model, @LoginUser SessionUser user) {
+    @GetMapping("/my-store")
+    public String myStore(Model model, @LoginUser SessionUser user) {
         if (user != null) {
             model.addAttribute("loginUserName", user.getName());
             model.addAttribute("loginUserImg", user.getPicture());
         }
 
-        return "store";
+        return "my-store";
     }
 
-    @GetMapping("/mypage")
-    public String mypage(Model model, @LoginUser SessionUser user) {
+    @GetMapping("/my-page")
+    public String myPage(Model model, @LoginUser SessionUser user) {
         if (user != null) {
             model.addAttribute("loginUserName", user.getName());
             model.addAttribute("loginUserImg", user.getPicture());
         }
 
-        return "mypage";
+        return "my-page";
     }
 
     @GetMapping("/about")
@@ -59,13 +59,13 @@ public class RouterController {
         return "about";
     }
 
-    @GetMapping("/mylogin")
+    @GetMapping("/my-login")
     public String myLogin(Model model, @LoginUser SessionUser user) {
         if (user != null) {
             model.addAttribute("loginUserName", user.getName());
             model.addAttribute("loginUserImg", user.getPicture());
         }
 
-        return "mylogin";
+        return "my-login";
     }
 }
