@@ -2,6 +2,7 @@ package com.hoondragonite.leassemble.domain.user;
 
 import com.hoondragonite.leassemble.domain.BaseTimeEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.security.AuthProvider;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,18 +20,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 public class User extends BaseTimeEntity {
-
     @Id
+    @Column(name = "USER_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
+
+    @Column(nullable = false, name = "USER_NM")
     private String name;
-    @Column(nullable = false)
+
+    @Column(nullable = false, name = "USER_EMAIL")
     private String email;
-    @Column
+
+    @Column(name = "USER_PICTURE")
     private String picture;
+
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false, name = "USER_ROLE")
     private Role role;
 
     @Builder
