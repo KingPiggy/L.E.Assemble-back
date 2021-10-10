@@ -2,6 +2,7 @@ package com.hoondragonite.leassemble.domain.store;
 
 import com.hoondragonite.leassemble.domain.BaseTimeEntity;
 import com.hoondragonite.leassemble.domain.user.User;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -31,4 +32,20 @@ public class Store extends BaseTimeEntity {
     @ManyToOne
     @JoinColumn(nullable = false, name = "USER_ID")
     private User ownerUser;
+
+    @Builder
+    public Store(String name, String info, String tel, String status, User ownerUser) {
+        this.name = name;
+        this.info = info;
+        this.tel = tel;
+        this.status = status;
+        this.ownerUser = ownerUser;
+    }
+
+    public void update(String name, String info, String tel, String status) {
+        this.name = name;
+        this.info = info;
+        this.tel = tel;
+        this.status = status;
+    }
 }
