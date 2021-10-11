@@ -37,4 +37,7 @@ public class StoreService {
 
         return new StoreResponseDto(entity);
     }
+
+    // 유저는 상점을 가진다.
+    // 상점은 유저를 안다.
 }
