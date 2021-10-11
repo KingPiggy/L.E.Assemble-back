@@ -28,10 +28,20 @@ public class StoreRepositoryTest {
     @Test
     public void 유저의_상점_조회하기(){
         //given
-
+        User testUser = User.builder()
+                .name("테스트")
+                .email("abc@naver.com")
+                .build();
         //when
+        Store store = Store.builder()
+                .name("테스트 상점")
+                .tel("123-1234")
+                .info("테스트 상점 소개내용 입니다.")
+                .status("정상영업")
+                .ownerUser(testUser)
+                .build();
 
         //then
-
+        assertThat(store.getOwnerUser().getName()).isEqualTo("테스트");
     }
 }
