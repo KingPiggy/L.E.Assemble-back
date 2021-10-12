@@ -31,13 +31,9 @@ public class StoreService {
         return id;
     }
 
-    public StoreResponseDto findByUId(Long id) {
+    public StoreResponseDto findById(Long id) {
         Store entity = storeRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 상점은 없습니다. id = " + id));
-
         return new StoreResponseDto(entity);
     }
-
-    // 유저는 상점을 가진다.
-    // 상점은 유저를 안다.
 }

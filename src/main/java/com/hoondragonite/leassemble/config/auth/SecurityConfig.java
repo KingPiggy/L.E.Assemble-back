@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/assets/**", "/css/**", "/images/**", "/js/**", "/h2-console/**").permitAll()
                 .antMatchers("/profile", "/api/profile").permitAll() // 배포 시 서버에서 사용하는 URL
-                .antMatchers("/api/**").hasRole(Role.USER.name()) // 사용자만 허용
+                .antMatchers("/api/**", "/user").hasRole(Role.USER.name()) // 사용자만 허용
                 .antMatchers("/my-login", "/store-events", "/about").permitAll() // 모두 허용
                 .anyRequest().authenticated()
                 .and()

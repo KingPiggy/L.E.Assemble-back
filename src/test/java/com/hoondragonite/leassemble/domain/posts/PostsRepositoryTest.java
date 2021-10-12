@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
@@ -24,6 +25,7 @@ public class PostsRepositoryTest {
         postsRepository.deleteAll();
     }
 
+    @WithMockUser(roles = "USER")
     @Test
     public void 게시글저장_불러오기() {
         //given
@@ -45,6 +47,7 @@ public class PostsRepositoryTest {
         assertThat(posts.getContent()).isEqualTo(content);
     }
 
+    @WithMockUser(roles = "USER")
     @Test
     public void BaseTimeEntity_등록() {
         //given

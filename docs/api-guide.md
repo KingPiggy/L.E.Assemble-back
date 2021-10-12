@@ -1,46 +1,66 @@
-# L.E. Assemble REST API Guide
+# L.E. Assemble API Guide
 
-## user
+## HTTP 메소드별 어노테이션 규칙
+생성 @PostMapping("/api/something")  
+목록조회 @GetMapping("/api/something")  
+단건조회 @GetMapping("/api/something/{id}")  
+수정 @PutMapping("/api/something/{id}")  
+삭제 @DeleteMapping("/api/something/{id}")  
 
-GET /api/user/{id}
-POST /api/user/{id}
-PUT /api/user/{id}
-DELETE /api/user/{id}
+---
 
-## store
-GET : /api/owner/{user_id}/stores
-GET : /api/owner/{user_id}/stores/{store_id}
-POST : /api/owner/{user_id}/stores
-PUT /api/owner/{user_id}/stores/{store_id}
-DELETE /api/owner/{user_id}/stores/{store_id}
+## 사용자 관련 API
+- 접근권한 : 사용자 본인
 
-## product
-GET : /api/store/{store_id}/products
-GET : /api/store/{store_id}/products/{product_id}
-POST : /api/store/{store_id}/products
-PUT : /api/store/{store_id}/products/{product_id}
-DELETE : /api/store/{store_id}/products/{product_id}
+### user
+GET /api/user/{id}  
+PUT /api/user/{id}  
 
-## store event
-GET : /api/store/{store_id}/events
-GET : /api/store/{store_id}/events/{event_id}
-POST : /api/store/{store_id}/events
-PUT : /api/store/{store_id}/events/{event_id}
-DELETE : /api/store/{store_id}/events/{event_id}
+### store
+GET : /api/user/{id}/stores  
+GET : /api/user/{id}/stores/{id}  
+POST : /api/user/{id}/stores  
+PUT /api/user/{id}/stores/{store_id}  
+DELETE /api/user/{id}/stores/{store_id}  
 
-## store event product
-GET : /api/store/{store_id}/events/{event_id}/products
-GET : /api/store/{store_id}/events/{event_id}/products/{product_id}
-POST : /api/store/{store_id}/events/{event_id}/products
-PUT : /api/store/{store_id}/events/{event_id}/products/{product_id}
-DELETE : /api/store/{store_id}/events/{event_id}/products/{product_id}
+### product
+GET : /api/user/{id}/store/{id}/products  
+GET : /api/user/{id}/store/{id}/products/{id}  
+POST : /api/user/{id}/store/{id}/products  
+PUT : /api/user/{id}/store/{id}/products/{id}  
+DELETE : /api/user/{id}/store/{id}/products/{id}  
 
-## order
-GET : /api/users/{user_id}/orders
-GET : /api/users/{user_id}/orders/{order_id}
-POST : /api/users/{user_id}/orders
-DELETE : /api/users/{user_id}/orders/{order_id}
+### store event
+GET : /api/user/{id}/store/{id}/events  
+GET : /api/user/{id}/store/{id}/events/{id}  
+POST : /api/user/{id}/store/{id}/events  
+PUT : /api/user/{id}/store/{id}/events/{id}  
+DELETE : /api/user/{id}/store/{id}/events/{id}  
 
-## login
+### store event item
+GET : /api/user/{id}/store/{id}/events/{id}/items  
+GET : /api/user/{id}/store/{id}/events/{id}/items/{id}  
+POST : /api/user/{id}/store/{id}/events/{id}/items  
+PUT : /api/user/{id}/store/{id}/events/{id}/items/{id}  
+DELETE : /api/user/{id}/store/{id}/events/{id}/items/{id}  
+
+### order
+GET : /api/users/{id}/orders
+GET : /api/users/{id}/orders/{id}
+POST : /api/users/{id}/orders
+DELETE : /api/users/{id}/orders/{id}
+
+---
+
+## 기능별 API
+
+### 진행중 이벤트
+GET : /store-events  
+GET : /store-events/{api}  
+
+---
+
+### login
 /oauth2/callback/{서비스코드}
 /oauth2/callback/google
+/oauth2/callback/kakao
