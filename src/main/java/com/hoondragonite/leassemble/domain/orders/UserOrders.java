@@ -1,7 +1,6 @@
-package com.hoondragonite.leassemble.domain.order;
+package com.hoondragonite.leassemble.domain.orders;
 
 import com.hoondragonite.leassemble.domain.BaseTimeEntity;
-import com.hoondragonite.leassemble.domain.store.StoreEvent;
 import com.hoondragonite.leassemble.domain.user.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,13 +11,13 @@ import java.sql.Date;
 @Getter
 @NoArgsConstructor
 @Entity
-public class UserOrder extends BaseTimeEntity {
+public class UserOrders extends BaseTimeEntity {
     @Id
-    @Column(name = "USER_ORDER_ID")
+    @Column(name = "USER_ORDERS_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, name = "USER_ORDER_DATE")
+    @Column(nullable = false, name = "USER_ORDERS_DATE")
     private Date date;
 
     // 주문번호

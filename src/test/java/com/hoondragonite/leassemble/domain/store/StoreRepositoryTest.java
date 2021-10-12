@@ -57,5 +57,6 @@ public class StoreRepositoryTest {
 
         //then
         assertThat(storeList.get(0).getName()).isEqualTo("테스트 상점");
+        System.out.println(storeList.get(0).getName());
     }
 }

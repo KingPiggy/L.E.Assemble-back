@@ -1,4 +1,4 @@
-package com.hoondragonite.leassemble.domain.order;
+package com.hoondragonite.leassemble.domain.orders;
 
 import com.hoondragonite.leassemble.domain.BaseTimeEntity;
 import lombok.Getter;
@@ -9,9 +9,9 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class UserOrderDetail extends BaseTimeEntity {
+public class UserOrdersDetail extends BaseTimeEntity {
     @Id
-    @Column(name = "USER_ORDER_DETAIL_ID")
+    @Column(name = "USER_ORDERS_DETAIL_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -22,6 +22,6 @@ public class UserOrderDetail extends BaseTimeEntity {
     // 주문한 이벤트상품 price
     
     @ManyToOne
-    @JoinColumn(name = "USER_ORDER_ID")
-    private UserOrder userOrder;
+    @JoinColumn(name = "USER_ORDERS_ID")
+    private UserOrders userOrders;
 }

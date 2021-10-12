@@ -15,42 +15,42 @@
 - 접근권한 : 사용자 본인
 
 ### user
-GET /api/user/{id}  
-PUT /api/user/{id}
+GET /api/user  
+PUT /api/user
 
 ### store
-GET : /api/user/{id}/stores  
-GET : /api/user/{id}/stores/{id}  
-POST : /api/user/{id}/stores  
-PUT /api/user/{id}/stores/{store_id}  
-DELETE /api/user/{id}/stores/{store_id}
+GET : /api/user/stores  
+GET : /api/user/stores/{id}  
+POST : /api/user/stores  
+PUT /api/user/stores/{store_id}  
+DELETE /api/user/stores/{store_id}
 
 ### product
-GET : /api/user/{id}/store/{id}/products  
-GET : /api/user/{id}/store/{id}/products/{id}  
-POST : /api/user/{id}/store/{id}/products  
-PUT : /api/user/{id}/store/{id}/products/{id}  
-DELETE : /api/user/{id}/store/{id}/products/{id}
+GET : /api/user/stores/{id}/products  
+GET : /api/user/stores/{id}/products/{id}  
+POST : /api/user/stores/{id}/products  
+PUT : /api/user/stores/{id}/products/{id}  
+DELETE : /api/user/stores/{id}/products/{id}
 
 ### store event
-GET : /api/user/{id}/store/{id}/events  
-GET : /api/user/{id}/store/{id}/events/{id}  
-POST : /api/user/{id}/store/{id}/events  
-PUT : /api/user/{id}/store/{id}/events/{id}  
-DELETE : /api/user/{id}/store/{id}/events/{id}
+GET : /api/user/stores/{id}/events  
+GET : /api/user/stores/{id}/events/{id}  
+POST : /api/user/stores/{id}/events  
+PUT : /api/user/stores/{id}/events/{id}  
+DELETE : /api/user/stores/{id}/events/{id}  
 
 ### store event item
-GET : /api/user/{id}/store/{id}/events/{id}/items  
-GET : /api/user/{id}/store/{id}/events/{id}/items/{id}  
-POST : /api/user/{id}/store/{id}/events/{id}/items  
-PUT : /api/user/{id}/store/{id}/events/{id}/items/{id}  
-DELETE : /api/user/{id}/store/{id}/events/{id}/items/{id}
+GET : /api/user/stores/{id}/events  
+GET : /api/user/stores/{id}/events/{id}  
+POST : /api/user/stores/{id}/events  
+PUT : /api/user/stores/{id}/events/{id}  
+DELETE : /api/user/stores/{id}/events/{id}
 
 ### order
-GET : /api/users/{id}/orders
-GET : /api/users/{id}/orders/{id}
-POST : /api/users/{id}/orders
-DELETE : /api/users/{id}/orders/{id}
+GET : /api/user/{id}/orders
+GET : /api/user/{id}/orders/{id}
+POST : /api/user/{id}/orders
+DELETE : /api/user/{id}/orders/{id}
 
 ---
 
