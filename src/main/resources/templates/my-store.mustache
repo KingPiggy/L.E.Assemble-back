@@ -1,9 +1,68 @@
 {{>layout/header}}
 <main>
     <div class="container">
-        <div class="row">
-            <h1>내 상점</h1>
-        </div>
+        <section>
+            <h1 class="text-primary">내 상점</h1>
+        </section>
+        <section>
+            <div class="row mt-5">
+                <h2 class="text-center">👇 당신의 상점들</h2>
+            </div>
+            {{^stores}}
+                <div class="row mt-5">
+                    <h3 class="text-center">없다면 지금 만들어보세요.</h3>
+                </div>
+                <div class="row mt-3 justify-content-center align-self-center">
+                    <button type="button" class="col-4 btn btn-primary" data-bs-toggle="modal" data-bs-target="#createStoreModal">지금 개설하기</button>
+                    <div class="modal fade" id="createStoreModal" tabindex="-1" aria-labelledby="createStoreModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="createStoreModalLabel">상점 개설하기</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                                    <button type="button" class="btn btn-primary" onclick="doCreateStore()">개설</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/stores}}
+            {{#stores}}
+                <div class="row">
+                    <table class="table">
+                        <thead>
+                        <th>ID</th>
+                        <th>이름</th>
+                        <th>정보</th>
+                        <th>전화번호</th>
+                        <th>상태</th>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{id}}</td>
+                            <td>{{name}}</td>
+                            <td>{{info}}</td>
+                            <td>{{tel}}</td>
+                            <td>{{status}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            {{/stores}}
+        </section>
     </div>
 </main>
 {{>layout/footer}}

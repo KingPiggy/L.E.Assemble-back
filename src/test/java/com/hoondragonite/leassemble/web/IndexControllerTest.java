@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class RouterControllerTest {
+public class IndexControllerTest {
 
     @Autowired
     MockMvc mockMvc;

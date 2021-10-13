@@ -25,3 +25,5 @@ findBySomething : Something은 멤버변수로 존재하는 그대로 적음(컬
 
 ##### com.fasterxml.jackson.databind.JsonMappingException: Infinite recursion (StackOverflowError)
 양방향 매핑 오류
+
+##### requestDto 날릴 때 외래키로 User가 같이 붙어야하는데 이를 어디서 붙이면 좋을까에 대한 고민
