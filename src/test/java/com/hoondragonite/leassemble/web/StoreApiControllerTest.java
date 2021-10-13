@@ -9,9 +9,11 @@ import com.hoondragonite.leassemble.domain.user.Role;
 import com.hoondragonite.leassemble.domain.user.User;
 import com.hoondragonite.leassemble.domain.user.UserRepository;
 import com.hoondragonite.leassemble.web.dto.StoreSaveRequestDto;
+import com.hoondragonite.leassemble.web.dto.StoreUpdateRequestDto;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,6 +26,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -55,6 +58,18 @@ public class StoreApiControllerTest {
                 .apply(springSecurity())
                 .build();
         mockHttpSession = new MockHttpSession();
+
+        createUser();
+    }
+
+    public void createUser(){
+        userRepository.save(User.builder()
+                .name("테스트")
+                .email("a@naver.com")
+                .picture("none")
+                .role(Role.USER)
+                .build()
+        );
     }
 
     @After
@@ -67,14 +82,6 @@ public class StoreApiControllerTest {
     @WithMockUser(roles = "USER")
     public void 유저는_여러상점을_갖고있다() throws Exception {
         //given
-        userRepository.save(User.builder()
-                .name("테스트")
-                .email("a@naver.com")
-                .picture("none")
-                .role(Role.USER)
-                .build()
-        );
-
         User testUser = userRepository.findAll().get(0);
         SessionUser sessionUser = new SessionUser(testUser);
 
@@ -104,14 +111,6 @@ public class StoreApiControllerTest {
     @WithMockUser(roles = "USER")
     public void 유저는_상점을_만든다() throws Exception {
         //given
-        userRepository.save(User.builder()
-                .name("테스트")
-                .email("a@naver.com")
-                .picture("none")
-                .role(Role.USER)
-                .build()
-        );
-
         User testUser = userRepository.findAll().get(0);
         SessionUser sessionUser = new SessionUser(testUser);
 
@@ -129,8 +128,6 @@ public class StoreApiControllerTest {
 
 
         //then
-        // new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString("DTO객체");
-
         String dtoContent = new ObjectMapper()
                 .registerModule(new JavaTimeModule())
                 .writeValueAsString(dto);
@@ -146,6 +143,76 @@ public class StoreApiControllerTest {
     @Test
     @WithMockUser(roles = "USER")
     public void 상점을_수정한다() throws Exception {
+        // given
+        User testUser = userRepository.findAll().get(0);
+        SessionUser sessionUser = new SessionUser(testUser);
 
+        storeRepository.save(Store.builder()
+                .name("test1")
+                .info("정보")
+                .tel("1234")
+                .ownerUser(testUser)
+                .build()
+        );
+
+        StoreUpdateRequestDto dto = StoreUpdateRequestDto.builder()
+                .name("수정된 test1")
+                .info("수정된 정보")
+                .tel("1234")
+                .status("냠냠")
+                .build();
+
+        Store store = storeRepository.findAll().get(0);
+
+        // when
+        String url = "http://localhost:" + port + "/api/user/stores" + "/" + store.getId().toString();
+        mockHttpSession.setAttribute("user", sessionUser);
+
+
+        //then
+        String dtoContent = new ObjectMapper()
+                .registerModule(new JavaTimeModule())
+                .writeValueAsString(dto);
+
+        mvc.perform(put(url)
+                        .session(mockHttpSession)
+                        .content(dtoContent)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        Store resultStore = storeRepository.findAll().get(0);
+
+        assertThat(resultStore.getName()).isEqualTo("수정된 test1");
+    }
+
+    @Test
+    @WithMockUser(roles = "USER")
+    public void 상점을_삭제한다() throws Exception {
+        // given
+        User testUser = userRepository.findAll().get(0);
+        SessionUser sessionUser = new SessionUser(testUser);
+
+        storeRepository.save(Store.builder()
+                .name("test1")
+                .info("정보")
+                .tel("1234")
+                .ownerUser(testUser)
+                .build()
+        );
+
+        Store store = storeRepository.findAll().get(0);
+
+        // when
+        String url = "http://localhost:" + port + "/api/user/stores" + "/" + store.getId().toString();
+        mockHttpSession.setAttribute("user", sessionUser);
+
+        //then
+        mvc.perform(delete(url)
+                        .session(mockHttpSession))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        assertThat(storeRepository.count()).isEqualTo(0);
     }
 }
