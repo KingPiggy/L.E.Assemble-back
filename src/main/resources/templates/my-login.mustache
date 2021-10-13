@@ -1,28 +1,26 @@
 {{>layout/header}}
 
 <div class="jumbotron">
-  <div class="container">
-    <h1>로그인</h1>
-  </div>
+    <div class="container">
+        <h1>로그인</h1>
+    </div>
 </div>
-<section>
-  <div class="container">
+
+<div class="container my-body">
     {{#userName}}
-      <span id="user">{{userName}}</span>
-      <a href="/logout" class="btn btn-info active" role="button">로그아웃</a>
+        <span id="user">{{userName}}</span>
+        <a href="/logout" class="btn btn-info active" role="button">로그아웃</a>
     {{/userName}}
     {{^userName}}
-      <ul>
-        <li>
-          <a href="/oauth2/authorization/google" class="btn" role="button">구글 로그인</a>
-        </li>
-        <li>
-          <a href="/oauth2/authorization/kakao" class="btn" role="button">카카오 로그인</a>
-        </li>
-      </ul>
+        <ul>
+            <li>
+                <a href="/oauth2/authorization/google" class="btn" role="button">구글 로그인</a>
+            </li>
+            <li>
+                <a href="/oauth2/authorization/kakao" class="btn" role="button">카카오 로그인</a>
+            </li>
+        </ul>
     {{/userName}}
-  </div>
-</section>
-</main>
+</div>
 
 {{>layout/footer}}
