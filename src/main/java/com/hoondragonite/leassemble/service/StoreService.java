@@ -29,9 +29,16 @@ public class StoreService {
     public Long update(Long id, StoreUpdateRequestDto requestDto) {
         Store store = storeRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 상점은 없습니다. id = " + id));
-        store.update(requestDto.getName(), requestDto.getInfo(), requestDto.getTel(), requestDto.getStatus());
-
+        store.update(requestDto);
+        // return storeRepository.save(store).getId();
         return id;
+    }
+
+    @Transactional
+    public void delete(Long id){
+        Store store = storeRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 상점은 없습니다. id = " + id));
+        storeRepository.delete(store);
     }
 
     @Transactional(readOnly = true)
@@ -41,9 +48,10 @@ public class StoreService {
         return new StoreResponseDto(entity);
     }
 
+    //코드 개선 필요
     @Transactional(readOnly = true)
-    public List<StoreResponseDto> findAllByUserId(Long id) {
-        List<Store> storeList = storeRepository.findByOwnerUser_Id(id);
+    public List<StoreResponseDto> findAllByUserId(Long ownerUserId) {
+        List<Store> storeList = storeRepository.findByOwnerUser_Id(ownerUserId);
         List<StoreResponseDto> responseDtos = new ArrayList<StoreResponseDto>();
 
         for (Store s : storeList) {

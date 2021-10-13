@@ -2,6 +2,7 @@ package com.hoondragonite.leassemble.domain.store;
 
 import com.hoondragonite.leassemble.domain.BaseTimeEntity;
 import com.hoondragonite.leassemble.domain.user.User;
+import com.hoondragonite.leassemble.web.dto.StoreUpdateRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,10 +43,10 @@ public class Store extends BaseTimeEntity {
         this.ownerUser = ownerUser;
     }
 
-    public void update(String name, String info, String tel, String status) {
-        this.name = name;
-        this.info = info;
-        this.tel = tel;
-        this.status = status;
+    public void update(StoreUpdateRequestDto dto) {
+        this.name = dto.getName();
+        this.info = dto.getInfo();
+        this.tel = dto.getTel();
+        this.status = dto.getStatus();
     }
 }
