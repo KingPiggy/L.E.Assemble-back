@@ -52,24 +52,3 @@ body,
 html {
     font-family: 'Roboto', sans-serif;
 }
-
-.my-body{
-    margin-top: 60px;
-}
-
-.menu-item-user{
-    float: righ
-}
-
-.my-text-white{
-    color: white;
-    text-align: center;
-}
-.my-nav-title{
-    color: white;
-}
-
-.info-row{
-    min-height: 150px;
-    margin-top: 20px;
-}

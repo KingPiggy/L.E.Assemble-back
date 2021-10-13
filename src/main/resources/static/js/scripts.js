@@ -1,1 +1,3 @@
-console.log("hi");
+function loginBtnOnClick(){
+    location.href="/my-login";
+}
