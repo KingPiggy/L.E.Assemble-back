@@ -119,7 +119,7 @@ public class StoreApiControllerTest {
                 .info("정보")
                 .tel("0101")
                 .status("영업")
-                .ownerUser(testUser)
+                //.ownerUser() // 클라이언트에서 User 빼고 전송함
                 .build();
 
         //when

@@ -24,6 +24,10 @@ public class StoreSaveRequestDto {
         this.ownerUser = ownerUser;
     }
 
+    public void setOwnerUser(User ownerUser){
+        this.ownerUser = ownerUser;
+    }
+
     public Store toEntity() {
         return Store.builder()
                 .name(name)

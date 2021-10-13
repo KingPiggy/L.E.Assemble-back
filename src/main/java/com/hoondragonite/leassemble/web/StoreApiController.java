@@ -6,6 +6,7 @@ import com.hoondragonite.leassemble.service.StoreService;
 import com.hoondragonite.leassemble.web.dto.StoreResponseDto;
 import com.hoondragonite.leassemble.web.dto.StoreSaveRequestDto;
 import com.hoondragonite.leassemble.web.dto.StoreUpdateRequestDto;
+import com.hoondragonite.leassemble.web.dto.UserRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,8 +30,9 @@ public class StoreApiController {
     }
 
     @PostMapping("/stores")
-    public Long saveStore(@RequestBody StoreSaveRequestDto dto){
-        return storeService.save(dto);
+    public Long saveStore(@RequestBody StoreSaveRequestDto dto, @LoginUser SessionUser user){
+        UserRequestDto userDto = UserRequestDto.builder().user(user).build();
+        return storeService.save(dto, userDto);
     }
 
     @PutMapping("/stores/{id}")

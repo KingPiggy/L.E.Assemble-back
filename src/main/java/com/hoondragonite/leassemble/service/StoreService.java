@@ -2,9 +2,12 @@ package com.hoondragonite.leassemble.service;
 
 import com.hoondragonite.leassemble.domain.store.Store;
 import com.hoondragonite.leassemble.domain.store.StoreRepository;
+import com.hoondragonite.leassemble.domain.user.User;
+import com.hoondragonite.leassemble.domain.user.UserRepository;
 import com.hoondragonite.leassemble.web.dto.StoreResponseDto;
 import com.hoondragonite.leassemble.web.dto.StoreSaveRequestDto;
 import com.hoondragonite.leassemble.web.dto.StoreUpdateRequestDto;
+import com.hoondragonite.leassemble.web.dto.UserRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,8 +23,14 @@ public class StoreService {
 
     private final StoreRepository storeRepository;
 
+    private final UserRepository userRepository;
+
     @Transactional
-    public Long save(StoreSaveRequestDto requestDto) {
+    public Long save(StoreSaveRequestDto requestDto, UserRequestDto userDto) {
+        User user = userRepository.findById(userDto.getId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저는 없습니다. id = " + userDto.getId()));
+        requestDto.setOwnerUser(user);
+
         return storeRepository.save(requestDto.toEntity()).getId();
     }
 
@@ -34,7 +43,7 @@ public class StoreService {
     }
 
     @Transactional
-    public void delete(Long id){
+    public void delete(Long id) {
         Store store = storeRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 상점은 없습니다. id = " + id));
         storeRepository.delete(store);
