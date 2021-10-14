@@ -4,21 +4,27 @@
         <div class="row">
             <h1>로그인</h1>
         </div>
-        <div class="row">
-            {{#userName}}
-                <span id="user">{{userName}}</span>
-                <a href="/logout" class="btn btn-info active" role="button">로그아웃</a>
-            {{/userName}}
-            {{^userName}}
-                <ul>
-                    <li>
-                        <a href="/oauth2/authorization/google" class="btn" role="button">구글 로그인</a>
-                    </li>
-                    <li>
-                        <a href="/oauth2/authorization/kakao" class="btn" role="button">카카오 로그인</a>
-                    </li>
-                </ul>
-            {{/userName}}
+        <div class="row align-items-center justify-content-center">
+            <div class="col-5">
+                {{#userName}}
+                    <span id="user">{{userName}}</span>
+                    <a href="/logout" class="btn btn-info active" role="button">로그아웃</a>
+                {{/userName}}
+                {{^userName}}
+                    <ul>
+                        <li>
+                            <button onclick="doGoogleLogin()" class="btn col-5 m-3">
+                                <img src="/assets/google-login-btn.png">
+                            </button>
+                        </li>
+                        <li>
+                            <button onclick="doKakaoLogin()" class="btn col-5 m-3">
+                                <img src="/assets/kakao-login-btn.png">
+                            </button>
+                        </li>
+                    </ul>
+                {{/userName}}
+            </div>
         </div>
     </div>
 </main>

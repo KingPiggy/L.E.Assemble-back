@@ -18,10 +18,10 @@ public class Store extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 500, nullable = false, name = "STORE_NM")
+    @Column(nullable = false, name = "STORE_NM")
     private String name;
 
-    @Column(length = 1000, name = "STORE_INFO")
+    @Column(length = 500, name = "STORE_INFO")
     private String info;
 
     @Column(name = "STORE_TEL")

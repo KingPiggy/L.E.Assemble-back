@@ -2,7 +2,6 @@ package com.hoondragonite.leassemble.web;
 
 import com.hoondragonite.leassemble.config.auth.LoginUser;
 import com.hoondragonite.leassemble.config.auth.dto.SessionUser;
-import com.hoondragonite.leassemble.domain.store.Store;
 import com.hoondragonite.leassemble.service.StoreService;
 import com.hoondragonite.leassemble.web.dto.StoreResponseDto;
 import lombok.RequiredArgsConstructor;

@@ -32,6 +32,11 @@ public class StoreApiController {
     @PostMapping("/stores")
     public Long saveStore(@RequestBody StoreSaveRequestDto dto, @LoginUser SessionUser user){
         UserRequestDto userDto = UserRequestDto.builder().user(user).build();
+        System.out.println(">>>>>>>>>>>>>>>.");
+        System.out.println(dto.getName());
+        System.out.println(dto.getInfo());
+        System.out.println(dto.getTel());
+        System.out.println(dto.getStatus());
         return storeService.save(dto, userDto);
     }
 

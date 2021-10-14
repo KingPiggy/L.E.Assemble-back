@@ -118,8 +118,8 @@ public class StoreApiControllerTest {
                 .name("상점")
                 .info("정보")
                 .tel("0101")
-                .status("영업")
-                //.ownerUser() // 클라이언트에서 User 빼고 전송함
+                .status("영업중")
+                //.ownerUser() // 클라이언트에서 User 빼고 전송하는 상황
                 .build();
 
         //when
@@ -159,7 +159,7 @@ public class StoreApiControllerTest {
                 .name("수정된 test1")
                 .info("수정된 정보")
                 .tel("1234")
-                .status("냠냠")
+                .status("영업중")
                 .build();
 
         Store store = storeRepository.findAll().get(0);

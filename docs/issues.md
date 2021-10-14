@@ -27,6 +27,8 @@ findBySomething : Something은 멤버변수로 존재하는 그대로 적음(컬
 양방향 매핑 오류
 
 ##### Store 저장할 때 외래키로 User 정보가 같이 붙어야하는데 이를 어디서 붙이면 좋을까에 대한 고민
-1. 컨트롤러에서 SessionUser를 통해 User 엔티티 얻고 채워주기
-2. 클라이언트에서 객체 같이 보내줌.
-3. 
+블로그 포스팅 완료
+
+##### Spring Security + Ajax 호출 시 CSRF 관련 403 Forbidden 에러
+https://www.popit.kr/spring-security-ajax-%ED%98%B8%EC%B6%9C-%EC%8B%9C-csrf-%EA%B4%80%EB%A0%A8-403-forbidden-%EC%97%90%EB%9F%AC/
+

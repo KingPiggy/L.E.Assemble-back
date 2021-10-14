@@ -1,5 +1,6 @@
-package com.hoondragonite.leassemble.config.auth;
+package com.hoondragonite.leassemble.config;
 
+import com.hoondragonite.leassemble.config.auth.CustomOAuth2UserService;
 import com.hoondragonite.leassemble.domain.user.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

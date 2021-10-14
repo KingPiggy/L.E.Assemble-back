@@ -48,7 +48,7 @@ public class StoreRepositoryTest {
                 .name("테스트 상점")
                 .info("테스트 상점 소개내용 입니다.")
                 .tel("123-1234")
-                .status("정상영업")
+                .status("d영업중")
                 .ownerUser(testUser)
                 .build());
 
