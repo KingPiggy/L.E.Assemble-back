@@ -9,71 +9,22 @@
                 <h2 class="text-center">👇 당신의 상점들</h2>
             </div>
             {{^stores}}
-                <div class="row mt-5">
+                <div class="row m-5">
                     <h3 class="text-center">없다면 지금 만들어보세요.</h3>
                 </div>
-                <div class="row mt-3 justify-content-center align-self-center">
-                    <button type="button" class="col-4 btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#createStoreModal">지금 개설하기
-                    </button>
-                    <div class="modal fade" id="createStoreModal" tabindex="-1" aria-labelledby="createStoreModalLabel"
-                         aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="createStoreModalLabel">상점 개설하기</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="mb-3">
-                                        <label for="storeNameForm" class="form-label">상점명</label>
-                                        <textarea class="form-control" id="storeNameForm"></textarea>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="storeInfoForm" class="form-label">상점 설명</label>
-                                        <textarea class="form-control" id="storeInfoForm" rows="3"></textarea>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="storeTelForm" class="form-label">상점 연락처</label>
-                                        <textarea class="form-control" id="storeTelForm"></textarea>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">영업상태</label>
-                                        <div class="btn-group" role="group"
-                                             aria-label="Basic radio toggle button group">
-                                            <input type="radio" class="btn-check" name="storeStatusRadio"
-                                                   id="btnradio1" autocomplete="off" value="영업중" checked>
-                                            <label class="btn btn-outline-primary" for="btnradio1">영업중</label>
-                                            <input type="radio" class="btn-check" name="storeStatusRadio"
-                                                   id="btnradio2" autocomplete="off" value="영업중단">
-                                            <label class="btn btn-outline-primary" for="btnradio2">영업중단</label>
-                                            <input type="radio" class="btn-check" name="storeStatusRadio"
-                                                   id="btnradio3" autocomplete="off" value="영업종료">
-                                            <label class="btn btn-outline-primary" for="btnradio3">영업종료</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                                    <button type="button" class="btn btn-primary" onclick="doCreateStore()">개설</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             {{/stores}}
-            {{#stores}}
-                <div class="row">
-                    <table class="table">
-                        <thead>
-                        <th>ID</th>
-                        <th>이름</th>
-                        <th>정보</th>
-                        <th>전화번호</th>
-                        <th>상태</th>
-                        </thead>
-                        <tbody>
+
+            <div class="row">
+                <table class="table" id="storeTable">
+                    <thead>
+                    <th>ID</th>
+                    <th>이름</th>
+                    <th>정보</th>
+                    <th>전화번호</th>
+                    <th>상태</th>
+                    </thead>
+                    <tbody>
+                    {{#stores}}
                         <tr>
                             <td>{{id}}</td>
                             <td>{{name}}</td>
@@ -81,11 +32,63 @@
                             <td>{{tel}}</td>
                             <td>{{status}}</td>
                         </tr>
-                        </tbody>
-                    </table>
+                    {{/stores}}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row mt-3 justify-content-center align-self-center">
+                <button type="button" class="col-4 btn btn-primary m-5" data-bs-toggle="modal"
+                        data-bs-target="#createStoreModal">상점 개설하기
+                </button>
+                <div class="modal fade" id="createStoreModal" tabindex="-1" aria-labelledby="createStoreModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="createStoreModalLabel">상점 개설하기</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="storeNameForm" class="form-label">상점명</label>
+                                    <textarea class="form-control" id="storeNameForm"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="storeInfoForm" class="form-label">상점 설명</label>
+                                    <textarea class="form-control" id="storeInfoForm" rows="3"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="storeTelForm" class="form-label">상점 연락처</label>
+                                    <textarea class="form-control" id="storeTelForm"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">영업상태</label>
+                                    <div class="btn-group" role="group"
+                                         aria-label="Basic radio toggle button group">
+                                        <input type="radio" class="btn-check" name="storeStatusRadio"
+                                               id="btnradio1" autocomplete="off" value="영업중" checked>
+                                        <label class="btn btn-outline-primary" for="btnradio1">영업중</label>
+                                        <input type="radio" class="btn-check" name="storeStatusRadio"
+                                               id="btnradio2" autocomplete="off" value="영업중단">
+                                        <label class="btn btn-outline-primary" for="btnradio2">영업중단</label>
+                                        <input type="radio" class="btn-check" name="storeStatusRadio"
+                                               id="btnradio3" autocomplete="off" value="영업종료">
+                                        <label class="btn btn-outline-primary" for="btnradio3">영업종료</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                                <button type="button" class="btn btn-primary" onclick="doCreateStore()">개설</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            {{/stores}}
+            </div>
         </section>
     </div>
 </main>
+<script src="/js/stores.js"></script>
 {{>layout/footer}}

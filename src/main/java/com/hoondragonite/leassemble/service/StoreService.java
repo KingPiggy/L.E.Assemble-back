@@ -27,6 +27,7 @@ public class StoreService {
 
     @Transactional
     public Long save(StoreSaveRequestDto requestDto, UserRequestDto userDto) {
+        // DTO의 사용자 정보 업데이트 후 저장
         User user = userRepository.findById(userDto.getId())
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저는 없습니다. id = " + userDto.getId()));
         requestDto.setOwnerUser(user);
@@ -60,7 +61,7 @@ public class StoreService {
     @Transactional(readOnly = true)
     public List<StoreResponseDto> findAllByUserId(Long ownerUserId) {
         List<Store> storeList = storeRepository.findByOwnerUser_Id(ownerUserId);
-        List<StoreResponseDto> responseDtos = new ArrayList<StoreResponseDto>();
+        List<StoreResponseDto> responseDtos = new ArrayList<>();
 
         for (Store s : storeList) {
             responseDtos.add(new StoreResponseDto(s));
