@@ -47,7 +47,6 @@ public class StoreRepositoryTest {
         storeRepository.save(Store.builder()
                 .name("테스트 상점")
                 .info("테스트 상점 소개내용 입니다.")
-                .tel("123-1234")
                 .status("d영업중")
                 .ownerUser(testUser)
                 .build());
@@ -58,5 +57,6 @@ public class StoreRepositoryTest {
         //then
         assertThat(storeList.get(0).getName()).isEqualTo("테스트 상점");
         System.out.println(storeList.get(0).getName());
+        System.out.println(storeList.get(0).getTel());
     }
 }
