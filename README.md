@@ -1,6 +1,11 @@
 # Limited Edition Assemble
 
-한정판매 상품들을 판매/구매하는 서비스
+한정판매 상품들을 판매/구매하는 서비스  
+<br>
+<a href="http://ec2-18-220-137-201.us-east-2.compute.amazonaws.com/" target="_blank">LIVE LINK</a>
+<br>
+
+---
 
 ## 프로젝트 목표
 - Spring Boot, JPA, Test, Infra 학습
