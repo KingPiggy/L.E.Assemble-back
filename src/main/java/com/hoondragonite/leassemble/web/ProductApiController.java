@@ -20,22 +20,28 @@ public class ProductApiController {
     private final ProductService productService;
 
     @GetMapping("/products")
-    List<ProductResponseDto> findAllProductsByStoreId(@PathVariable Long storeId){
+    List<ProductResponseDto> findAllProductsByStoreId(@PathVariable Long storeId) {
         return productService.findAllProductsByStoreId(storeId);
     }
 
     @GetMapping("/products/{productId}")
-    public ProductResponseDto findProductById(@PathVariable Long productId){
+    public ProductResponseDto findProductById(@PathVariable Long productId) {
         return productService.findById(productId);
     }
 
     @PostMapping("/products")
-    Long saveProduct(@RequestBody ProductSaveRequestDto productDto, @PathVariable Long storeId){
+    Long saveProduct(@RequestBody ProductSaveRequestDto productDto, @PathVariable Long storeId) {
         return productService.save(productDto, storeId);
     }
 
     @PutMapping("/products/{productId}")
-    public Long updateProduct(@PathVariable Long productId, @RequestBody ProductUpdateRequestDto dto){
+    public Long updateProduct(@PathVariable Long productId, @RequestBody ProductUpdateRequestDto dto) {
         return productService.update(productId, dto);
     }
+
+    @DeleteMapping("/products/{productId}")
+    public void deleteProduct(@PathVariable Long productId) {
+        productService.delete(productId);
+    }
+
 }

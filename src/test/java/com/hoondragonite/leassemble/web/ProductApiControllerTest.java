@@ -236,5 +236,35 @@ public class ProductApiControllerTest {
         System.out.println(">>>>>> Id : " + resultProduct.getId());
     }
 
+    @Test
+    @WithMockUser(roles = "USER")
+    public void 유저는_상점의_상품을_삭제한다() throws Exception {
+        // given
+        User testUser = userRepository.findAll().get(0);
+        SessionUser sessionUser = new SessionUser(testUser);
+        Store testStore = storeRepository.findByOwnerUser_Id(sessionUser.getId()).get(0);
+        Long testStoreId = testStore.getId();
 
+        productRepository.save(Product.builder()
+                .name("상품1")
+                .info("정보1")
+                .price(10000)
+                .store(testStore)
+                .build());
+
+        Product product = productRepository.findAll().get(0);
+        Long toUpdateProductId = product.getId();
+
+        // when
+        String url = "http://localhost:" + port + "/api/user/stores/"
+                + testStore.getId().toString() + "/products/" + toUpdateProductId.toString();
+
+        // then
+        mvc.perform(delete(url)
+                        .session(mockHttpSession))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        assertThat(productRepository.count()).isEqualTo(0);
+    }
 }
