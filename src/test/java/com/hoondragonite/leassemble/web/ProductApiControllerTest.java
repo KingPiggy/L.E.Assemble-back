@@ -92,6 +92,34 @@ public class ProductApiControllerTest {
 
     @Test
     @WithMockUser(roles = "USER")
+    public void 상점의_상품하나를_조회한다() throws Exception {
+        // given
+        User testUser = userRepository.findAll().get(0);
+        SessionUser sessionUser = new SessionUser(testUser);
+        Store testStore = storeRepository.findByOwnerUser_Id(sessionUser.getId()).get(0);
+
+        productRepository.save(Product.builder()
+                .name("상품1")
+                .info("정보1")
+                .price(10000)
+                .store(testStore)
+                .build());
+
+        Long toFindProductId = productRepository.findAll().get(0).getId();
+
+        // when
+        String url = "http://localhost:" + port + "/api/user/stores/"
+                + testStore.getId().toString() + "/products/" + toFindProductId.toString();
+        mockHttpSession.setAttribute("user", sessionUser);
+
+        // then
+        mvc.perform(get(url).session(mockHttpSession))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @WithMockUser(roles = "USER")
     public void 상점의_여러상품을_조회한다() throws Exception {
         // given
         User testUser = userRepository.findAll().get(0);
@@ -122,5 +150,4 @@ public class ProductApiControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk());
     }
-
 }

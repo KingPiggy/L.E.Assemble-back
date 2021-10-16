@@ -25,7 +25,7 @@ public class StoreApiController {
     }
 
     @GetMapping("/stores/{id}")
-    public StoreResponseDto findStoreByUserId(@PathVariable Long id){
+    public StoreResponseDto findStoreById(@PathVariable Long id){
         return storeService.findById(id);
     }
 

@@ -25,4 +25,9 @@ public class ProductApiController {
         return productService.findAllProductsByStoreId(storeId);
     }
 
+    @GetMapping("/products/{productId}")
+    public ProductResponseDto findProductById(@PathVariable Long productId){
+        return productService.findById(productId);
+    }
+
 }

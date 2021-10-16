@@ -29,4 +29,11 @@ public class ProductService {
 
         return responseDtos;
     }
+
+    @Transactional(readOnly = true)
+    public ProductResponseDto findById(Long productId){
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 상품은 없습니다. id = " + productId));
+        return new ProductResponseDto(product);
+    }
 }
