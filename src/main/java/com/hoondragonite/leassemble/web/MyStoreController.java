@@ -31,4 +31,14 @@ public class MyStoreController {
 
         return "my-store-info";
     }
+
+    @GetMapping("/my-store/products")
+    public String myStoreProducts(Model model, @LoginUser SessionUser user){
+        if (user != null) {
+            model.addAttribute("loginUserName", user.getName());
+            model.addAttribute("loginUserImg", user.getPicture());
+        }
+
+        return "my-store-products";
+    }
 }
