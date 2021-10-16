@@ -1,5 +1,7 @@
 package com.hoondragonite.leassemble.web;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.hoondragonite.leassemble.config.auth.dto.SessionUser;
 import com.hoondragonite.leassemble.domain.product.Product;
 import com.hoondragonite.leassemble.domain.product.ProductRepository;
@@ -8,6 +10,7 @@ import com.hoondragonite.leassemble.domain.store.StoreRepository;
 import com.hoondragonite.leassemble.domain.user.Role;
 import com.hoondragonite.leassemble.domain.user.User;
 import com.hoondragonite.leassemble.domain.user.UserRepository;
+import com.hoondragonite.leassemble.web.dto.ProductSaveRequestDto;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,6 +19,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -110,7 +114,6 @@ public class ProductApiControllerTest {
         // when
         String url = "http://localhost:" + port + "/api/user/stores/"
                 + testStore.getId().toString() + "/products/" + toFindProductId.toString();
-        mockHttpSession.setAttribute("user", sessionUser);
 
         // then
         mvc.perform(get(url).session(mockHttpSession))
@@ -143,11 +146,46 @@ public class ProductApiControllerTest {
         // when
         String url = "http://localhost:" + port + "/api/user/stores/"
                 + testStore.getId().toString() + "/products";
-        mockHttpSession.setAttribute("user", sessionUser);
 
         // then
         mvc.perform(get(url).session(mockHttpSession))
                 .andDo(print())
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    @WithMockUser(roles = "USER")
+    public void 유저는_상점의_상품을_등록한다() throws Exception {
+        // given
+        User testUser = userRepository.findAll().get(0);
+        SessionUser sessionUser = new SessionUser(testUser);
+        Store testStore = storeRepository.findByOwnerUser_Id(sessionUser.getId()).get(0);
+        Long testStoreId = testStore.getId();
+
+        ProductSaveRequestDto dto = ProductSaveRequestDto.builder()
+                .name("상품1")
+                .info("정보1")
+                .price(10000)
+                // .store()
+                .build();
+
+        // when
+        String url = "http://localhost:" + port + "/api/user/stores/"
+                + testStoreId + "/products";
+
+        //then
+        String dtoContent = new ObjectMapper()
+                .registerModule(new JavaTimeModule())
+                .writeValueAsString(dto);
+
+        mvc.perform(post(url)
+                        .session(mockHttpSession)
+                        .content(dtoContent)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        Product resultProduct = productRepository.findAll().get(0);
+        assertThat(resultProduct.getName()).isEqualTo("상품1");
     }
 }

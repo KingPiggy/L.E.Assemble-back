@@ -4,12 +4,10 @@ import com.hoondragonite.leassemble.config.auth.LoginUser;
 import com.hoondragonite.leassemble.config.auth.dto.SessionUser;
 import com.hoondragonite.leassemble.service.ProductService;
 import com.hoondragonite.leassemble.web.dto.ProductResponseDto;
+import com.hoondragonite.leassemble.web.dto.ProductSaveRequestDto;
 import com.hoondragonite.leassemble.web.dto.StoreResponseDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,4 +28,8 @@ public class ProductApiController {
         return productService.findById(productId);
     }
 
+    @PostMapping("/products")
+    Long saveProduct(@RequestBody ProductSaveRequestDto productDto, @PathVariable Long storeId){
+        return productService.save(productDto, storeId);
+    }
 }
