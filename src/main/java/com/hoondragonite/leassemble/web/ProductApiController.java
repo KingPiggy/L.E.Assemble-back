@@ -5,6 +5,7 @@ import com.hoondragonite.leassemble.config.auth.dto.SessionUser;
 import com.hoondragonite.leassemble.service.ProductService;
 import com.hoondragonite.leassemble.web.dto.ProductResponseDto;
 import com.hoondragonite.leassemble.web.dto.ProductSaveRequestDto;
+import com.hoondragonite.leassemble.web.dto.ProductUpdateRequestDto;
 import com.hoondragonite.leassemble.web.dto.StoreResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -31,5 +32,10 @@ public class ProductApiController {
     @PostMapping("/products")
     Long saveProduct(@RequestBody ProductSaveRequestDto productDto, @PathVariable Long storeId){
         return productService.save(productDto, storeId);
+    }
+
+    @PutMapping("/products/{productId}")
+    public Long updateProduct(@PathVariable Long productId, @RequestBody ProductUpdateRequestDto dto){
+        return productService.update(productId, dto);
     }
 }

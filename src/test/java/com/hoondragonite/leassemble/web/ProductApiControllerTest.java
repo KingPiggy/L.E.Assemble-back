@@ -11,6 +11,7 @@ import com.hoondragonite.leassemble.domain.user.Role;
 import com.hoondragonite.leassemble.domain.user.User;
 import com.hoondragonite.leassemble.domain.user.UserRepository;
 import com.hoondragonite.leassemble.web.dto.ProductSaveRequestDto;
+import com.hoondragonite.leassemble.web.dto.ProductUpdateRequestDto;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -188,4 +189,52 @@ public class ProductApiControllerTest {
         Product resultProduct = productRepository.findAll().get(0);
         assertThat(resultProduct.getName()).isEqualTo("상품1");
     }
+
+    @Test
+    @WithMockUser(roles = "USER")
+    public void 유저는_상점의_상품을_수정한다() throws Exception {
+        // given
+        User testUser = userRepository.findAll().get(0);
+        SessionUser sessionUser = new SessionUser(testUser);
+        Store testStore = storeRepository.findByOwnerUser_Id(sessionUser.getId()).get(0);
+        Long testStoreId = testStore.getId();
+
+        ProductUpdateRequestDto updateRequestDto = ProductUpdateRequestDto.builder()
+                .name("수정된 상품1")
+                .info("수정된 이름1")
+                .price(20000)
+                .build();
+
+        productRepository.save(Product.builder()
+                .name("상품1")
+                .info("정보1")
+                .price(10000)
+                .store(testStore)
+                .build());
+
+        Product product = productRepository.findAll().get(0);
+        Long toUpdateProductId = product.getId();
+
+        // when
+        String url = "http://localhost:" + port + "/api/user/stores/"
+                + testStore.getId().toString() + "/products/" + toUpdateProductId.toString();
+
+        // then
+        String dtoContent = new ObjectMapper()
+                .registerModule(new JavaTimeModule())
+                .writeValueAsString(updateRequestDto);
+
+        mvc.perform(put(url)
+                        .session(mockHttpSession)
+                        .content(dtoContent)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        Product resultProduct = productRepository.findAll().get(0);
+        assertThat(resultProduct.getName()).isEqualTo("수정된 상품1");
+        System.out.println(">>>>>> Id : " + resultProduct.getId());
+    }
+
+
 }

@@ -6,6 +6,7 @@ import com.hoondragonite.leassemble.domain.store.Store;
 import com.hoondragonite.leassemble.domain.store.StoreRepository;
 import com.hoondragonite.leassemble.web.dto.ProductResponseDto;
 import com.hoondragonite.leassemble.web.dto.ProductSaveRequestDto;
+import com.hoondragonite.leassemble.web.dto.ProductUpdateRequestDto;
 import com.hoondragonite.leassemble.web.dto.StoreResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -50,5 +51,14 @@ public class ProductService {
         dto.setStore(store);
 
         return productRepository.save(dto.toEntity()).getId();
+    }
+
+    @Transactional
+    public Long update(Long id, ProductUpdateRequestDto dto){
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 상품은 없습니다. id = " + id));
+
+        product.update(dto);
+        return product.getId();
     }
 }

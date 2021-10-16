@@ -40,7 +40,7 @@ public class StoreService {
         Store store = storeRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 상점은 없습니다. id = " + id));
         store.update(requestDto);
-        return storeRepository.save(store).getId();
+        return store.getId();
     }
 
     @Transactional
