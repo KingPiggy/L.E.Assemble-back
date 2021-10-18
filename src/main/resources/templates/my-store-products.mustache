@@ -1,0 +1,77 @@
+{{>layout/header}}
+<main>
+    <div class="container">
+        <section>
+            <ul class="list-inline">
+                <li class="list-inline-item h1 text-primary">{{store.name}} </li>
+                <li class="list-inline-item h1">상품관리</li>
+            </ul>
+        </section>
+        <section>
+            <div class="row">
+                <div>
+                    <h3>👇 상품 목록</h3>
+                </div>
+                {{^products}}
+                    <div class="row">
+                        <h3 class="text-center">없다면 지금 만들어보세요.</h3>
+                    </div>
+                {{/products}}
+                {{#products}}
+                    <div class="card m-3" style="width: 18rem;">
+                        <img src="" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{name}}</h5>
+                            <p class="card-text">{{info}}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">{{price}}</li>
+                        </ul>
+                        <div class="card-body">
+                            <a href="/api/user/stores/{{store.id}}/products/{{id}}" class="btn btn-dark card-link">수정</a>
+                            <a href="#" class="btn btn-danger card-link">삭제</a>
+                        </div>
+                    </div>
+                {{/products}}
+            </div>
+            <div class="row mt-3 justify-content-center align-self-center">
+                <button type="button" class="col-4 btn btn-primary m-5" data-bs-toggle="modal"
+                        data-bs-target="#createProductModal">상품 등록하기
+                </button>
+                <div class="modal fade" id="createProductModal" tabindex="-1" aria-labelledby="createProductModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="createProductModalLabel">상품 등록하기</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <span class="visually-hidden" id="storeId">{{store.id}}</span>
+                                <div class="mb-3">
+                                    <label for="productNameForm" class="form-label">상품명</label>
+                                    <textarea class="form-control" id="productNameForm"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="productInfoForm" class="form-label">상품 설명</label>
+                                    <textarea class="form-control" id="productInfoForm" rows="3"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="productPriceForm" class="form-label">상품 가격</label>
+                                    <input type="text" id="productPriceForm" min="0" onkeyup="inputNumberFormat(this)"/>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                                <button type="button" class="btn btn-primary" onclick="doCreateProduct()">개설</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+<script src="/js/products.js"></script>
+{{>layout/footer}}

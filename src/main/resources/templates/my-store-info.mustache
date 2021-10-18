@@ -2,7 +2,10 @@
 <main>
     <div class="container">
         <section>
-            <h1 class="text-primary">{{store.name}} 관리</h1>
+            <ul class="list-inline">
+                <li class="list-inline-item h1 text-primary">{{store.name}} </li>
+                <li class="list-inline-item h1">관리</li>
+            </ul>
         </section>
         <section>
             <div class="row">
@@ -12,7 +15,7 @@
                             <h3>메뉴</h3>
                         </div>
                         <div class="list-group">
-                            <a href="/my-store/products" class="list-group-item list-group-item-action">상품 관리</a>
+                            <a href="/my-store/{{store.id}}/products" class="list-group-item list-group-item-action">상품 관리</a>
                             <a href="#" class="list-group-item list-group-item-action">이벤트 관리</a>
                             <a href="#" class="list-group-item list-group-item-action">상점 정보 수정</a>
                         </div>
@@ -32,9 +35,6 @@
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">가격</li>
                             </ul>
-                            <div class="card-body">
-                                <a href="#" class="card-link">수정</a>
-                            </div>
                         </div>
                     </div>
                     <div class="m-5">
@@ -42,7 +42,8 @@
                         <table class="table">
                             <thead>
                             <th>이름</th>
-                            <th>기간</th>
+                            <th>시작일자</th>
+                            <th>종료일자</th>
                             <th>설명</th>
                             </thead>
                         </table>
