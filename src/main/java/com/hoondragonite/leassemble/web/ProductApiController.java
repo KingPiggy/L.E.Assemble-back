@@ -20,7 +20,7 @@ public class ProductApiController {
     private final ProductService productService;
 
     @GetMapping("/products")
-    List<ProductResponseDto> findAllProductsByStoreId(@PathVariable Long storeId) {
+    public List<ProductResponseDto> findAllProductsByStoreId(@PathVariable Long storeId) {
         return productService.findAllProductsByStoreId(storeId);
     }
 
@@ -30,7 +30,7 @@ public class ProductApiController {
     }
 
     @PostMapping("/products")
-    Long saveProduct(@RequestBody ProductSaveRequestDto productDto, @PathVariable Long storeId) {
+    public Long saveProduct(@RequestBody ProductSaveRequestDto productDto, @PathVariable Long storeId) {
         return productService.save(productDto, storeId);
     }
 

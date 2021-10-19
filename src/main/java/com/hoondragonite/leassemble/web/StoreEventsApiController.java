@@ -14,18 +14,27 @@ public class StoreEventsApiController {
     private final StoreEventsService storeEventsService;
 
     @GetMapping("/store-events")
-    List<StoreEventsResponseDto> findAllProductsByStoreId(@PathVariable Long storeId) {
+    public List<StoreEventsResponseDto> findAllProductsByStoreId(@PathVariable Long storeId) {
         return storeEventsService.findAllStoreEventsByStoreId(storeId);
     }
 
     @GetMapping("/store-events/{storeEventsId}")
-    StoreEventsResponseDto findStoreEventsById(@PathVariable Long storeEventsId) {
+    public StoreEventsResponseDto findStoreEventsById(@PathVariable Long storeEventsId) {
         return storeEventsService.findById(storeEventsId);
     }
 
     @PostMapping("/store-events")
-    Long saveStoreEvents(@RequestBody StoreEventsSaveRequestDto dto, @PathVariable Long storeId) {
-        return storeEventsService.save(dto, storeId);
+    public Long saveStoreEvents(@RequestBody StoreEventsSaveRequestDto dto, @PathVariable Long storeId) {
+        return storeEventsService.saveStoreEvents(dto, storeId);
     }
 
+    @PutMapping("/store-events/{storeEventsId}")
+    public Long updateStoreEvents(@PathVariable Long storeEventsId, @RequestBody StoreEventsUpdateRequestDto dto) {
+        return storeEventsService.updateStoreEvents(storeEventsId, dto);
+    }
+
+    @DeleteMapping("/store-events/{storeEventsId}")
+    public void deleteStoreEvents(@PathVariable Long storeEventsId) {
+        storeEventsService.deleteStoreEvents(storeEventsId);
+    }
 }

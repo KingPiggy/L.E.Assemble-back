@@ -8,6 +8,7 @@ import com.hoondragonite.leassemble.domain.store.StoreRepository;
 import com.hoondragonite.leassemble.web.dto.ProductResponseDto;
 import com.hoondragonite.leassemble.web.dto.StoreEventsResponseDto;
 import com.hoondragonite.leassemble.web.dto.StoreEventsSaveRequestDto;
+import com.hoondragonite.leassemble.web.dto.StoreEventsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,12 +45,27 @@ public class StoreEventsService {
     }
 
     @Transactional
-    public Long save(StoreEventsSaveRequestDto dto, Long storeId) {
+    public Long saveStoreEvents(StoreEventsSaveRequestDto dto, Long storeId) {
         // DTO의 상점 정보 업데이트 후 저장
         Store store = storeRepository.findById(storeId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 상점은 없습니다. id = " + storeId));
         dto.setStore(store);
 
         return storeEventsRepository.save(dto.toEntity()).getId();
+    }
+
+    @Transactional
+    public Long updateStoreEvents(Long id, StoreEventsUpdateRequestDto dto){
+        StoreEvents storeEvents = storeEventsRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 이벤트는 없습니다. id = " + id));
+        storeEvents.update(dto);
+        return storeEvents.getId();
+    }
+
+    @Transactional
+    public void deleteStoreEvents(Long storeEventsId){
+        StoreEvents storeEvents = storeEventsRepository.findById(storeEventsId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 이벤트는 없습니다. id = " + storeEventsId));
+        storeEventsRepository.delete(storeEvents);
     }
 }

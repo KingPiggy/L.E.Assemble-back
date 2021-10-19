@@ -160,7 +160,6 @@ public class StoreEventsApiControllerTest {
         User testUser = userRepository.findAll().get(0);
         SessionUser sessionUser = new SessionUser(testUser);
         Store testStore = storeRepository.findByOwnerUser_Id(sessionUser.getId()).get(0);
-        Long testStoreId = testStore.getId();
 
         StoreEventsSaveRequestDto dto = StoreEventsSaveRequestDto.builder()
                 .name("이벤트")
@@ -187,5 +186,81 @@ public class StoreEventsApiControllerTest {
 
         StoreEvents result = storeEventsRepository.findAll().get(0);
         assertThat(result.getName()).isEqualTo("이벤트");
+    }
+
+    @Test
+    @WithMockUser(roles = "USER")
+    public void 유저는_상점의_이벤트를_수정한다() throws Exception {
+        // given
+        User testUser = userRepository.findAll().get(0);
+        SessionUser sessionUser = new SessionUser(testUser);
+        Store testStore = storeRepository.findByOwnerUser_Id(sessionUser.getId()).get(0);
+
+        StoreEventsSaveRequestDto dto = StoreEventsSaveRequestDto.builder()
+                .name("수정된 이벤트")
+                .info("수정된 정보")
+                .startDate("2021-10-19")
+                .endDate("2021-10-19")
+                .build();
+
+        storeEventsRepository.save(StoreEvents.builder()
+                .name("이벤트1")
+                .info("설1")
+                .startDate("2021-10-19")
+                .endDate("2021-10-19")
+                .build());
+
+        StoreEvents storeEvents = storeEventsRepository.findAll().get(0);
+        Long toUpdateStoreEventsId  = storeEvents.getId();
+
+        // when
+        String url = "http://localhost:" + port + "/api/user/stores/"
+                + testStore.getId().toString() + "/store-events/" + toUpdateStoreEventsId.toString();
+
+        // then
+        String dtoContent = new ObjectMapper()
+                .registerModule(new JavaTimeModule())
+                .writeValueAsString(dto);
+
+        mvc.perform(put(url)
+                        .session(mockHttpSession)
+                        .content(dtoContent)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        StoreEvents result = storeEventsRepository.findAll().get(0);
+        assertThat(result.getName()).isEqualTo("수정된 이벤트");
+    }
+
+    @Test
+    @WithMockUser(roles = "USER")
+    public void 유저는_상점의_이벤트를_삭제한다() throws Exception {
+        // given
+        User testUser = userRepository.findAll().get(0);
+        SessionUser sessionUser = new SessionUser(testUser);
+        Store testStore = storeRepository.findByOwnerUser_Id(sessionUser.getId()).get(0);
+
+        storeEventsRepository.save(StoreEvents.builder()
+                .name("이벤트1")
+                .info("설1")
+                .startDate("2021-10-19")
+                .endDate("2021-10-19")
+                .build());
+
+        StoreEvents storeEvents = storeEventsRepository.findAll().get(0);
+        Long toDeleteStoreEventsId  = storeEvents.getId();
+
+        // when
+        String url = "http://localhost:" + port + "/api/user/stores/"
+                + testStore.getId().toString() + "/store-events/" + toDeleteStoreEventsId.toString();
+
+        // then
+        mvc.perform(delete(url)
+                        .session(mockHttpSession))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        assertThat(storeEventsRepository.count()).isEqualTo(0);
     }
 }

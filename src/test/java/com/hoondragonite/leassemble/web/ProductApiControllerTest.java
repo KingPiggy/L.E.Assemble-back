@@ -197,7 +197,6 @@ public class ProductApiControllerTest {
         User testUser = userRepository.findAll().get(0);
         SessionUser sessionUser = new SessionUser(testUser);
         Store testStore = storeRepository.findByOwnerUser_Id(sessionUser.getId()).get(0);
-        Long testStoreId = testStore.getId();
 
         ProductUpdateRequestDto updateRequestDto = ProductUpdateRequestDto.builder()
                 .name("수정된 상품1")
@@ -243,7 +242,6 @@ public class ProductApiControllerTest {
         User testUser = userRepository.findAll().get(0);
         SessionUser sessionUser = new SessionUser(testUser);
         Store testStore = storeRepository.findByOwnerUser_Id(sessionUser.getId()).get(0);
-        Long testStoreId = testStore.getId();
 
         productRepository.save(Product.builder()
                 .name("상품1")
