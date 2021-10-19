@@ -16,13 +16,15 @@ function doCreateProduct(){
                 dataType: "JSON",
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify(sendData),
-                success: function() {
-                    location.href="/my-store/" + storeId + "/products";
+                success: function(data) {
+                    console.log(data);
                 },
                 error:function(request, status, error){
                     alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                 }
     });
+
+    location.href="/my-store/" + storeId + "/products";
 
     $("#createProductModal").modal('hide');
 }
