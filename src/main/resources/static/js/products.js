@@ -16,8 +16,7 @@ function doCreateProduct(){
                 dataType: "JSON",
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify(sendData),
-                success: function(data) {
-                    console.log("저장 성공! uID is " + data);
+                success: function() {
                     location.href="/my-store/" + storeId + "/products";
                 },
                 error:function(request, status, error){
