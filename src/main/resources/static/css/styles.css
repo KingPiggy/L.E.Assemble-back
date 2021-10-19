@@ -52,3 +52,8 @@ body,
 html {
     font-family: 'Roboto', sans-serif;
 }
+
+a.custom-card,
+a.custom-card:hover {
+  color: inherit;
+}
