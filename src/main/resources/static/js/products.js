@@ -45,7 +45,7 @@ function openUpdateModal(e){
     $("#updateProductModal").modal('show');
 }
 
-function doUpdateProduct(productIdData){
+function doUpdateProduct(){
     let sendData = {
         name : ($('#updateProductNameForm').val()),
         info : $('#updateProductInfoForm').val(),
@@ -76,4 +76,35 @@ function doUpdateProduct(productIdData){
     });
 
     $("#updateProductModal").modal('hide');
+}
+
+function openDeleteModal(e){
+    var clickedCard = $(e).closest("#myCard");
+    var storeIdData = $(clickedCard).children("div").children("#cardStoreId").text();
+    var productIdData = $(clickedCard).children("div").children("#cardProductId").text();
+
+    $("#deleteStoreId").text(storeIdData);
+    $("#deleteProductId").text(productIdData);
+
+    $("#deleteProductModal").modal('show');
+}
+
+function doDeleteProduct(){
+    var storeId = $('#deleteStoreId').text();
+    var productId = $('#deleteProductId').text();
+
+    $("#deleteProductModal").modal('hide');
+
+    $.ajax({
+        type: "DELETE",
+        url: "/api/user/stores/" + storeId +
+            "/products/" + productId,
+        contentType: 'application/json; charset=utf-8',
+        success: function() {
+            location.href="/my-store/" + storeId + "/products";
+        },
+        error:function(request, status, error){
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        }
+    });
 }
