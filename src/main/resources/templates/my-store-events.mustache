@@ -7,8 +7,153 @@
                 <li class="list-inline-item h1">이벤트관리</li>
             </ul>
         </section>
+        <section>
+            <div class="row">
+                <div>
+                    <h3>👇 이벤트 목록</h3>
+                </div>
+                {{^storeEvents}}
+                    <div class="row">
+                        <h3 class="text-center">없다면 지금 만들어보세요.</h3>
+                    </div>
+                {{/storeEvents}}
 
-
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="d-none">storeId</th>
+                        <th class="d-none">eventId</th>
+                        <th>이벤트명</th>
+                        <th>설명</th>
+                        <th>시작일자</th>
+                        <th>종료일자</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#storeEvents}}
+                        <tr id="storeEventsRow">
+                            <td class="d-none" id="tdStoreId">{{store.id}}</td>
+                            <td class="d-none" id="tdStoreEventsId">{{id}}</td>
+                            <td id="tdStoreEventsName">{{name}}</td>
+                            <td id="tdStoreEventsInfo">{{info}}</td>
+                            <td id="tdStoreEventsStartDate">{{startDate}}</td>
+                            <td id="tdStoreEventsEndDate">{{endDate}}</td>
+                            <td>
+                                <button class="btn btn-primary" onclick="openCreateEventItemModal(this)">상품 등록하기
+                                </button>
+                                <button class="btn btn-dark" onclick="openUpdateModal(this)">수정</button>
+                                <button class="btn btn-danger" onclick="openDeleteModal(this)">삭제</button>
+                            </td>
+                        </tr>
+                    {{/storeEvents}}
+                    </tbody>
+                </table>
+                <div class="modal fade" id="updateStoreEventsModal" tabindex="-1"
+                     aria-labelledby="updateStoreEventsModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="updateStoreEventsModal">상품 수정하기</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="d-none" id="updateStoreId"></div>
+                                <div class="d-none" id="updateStoreEventsId"></div>
+                                <div class="mb-3">
+                                    <label for="updateStoreEventsNameForm" class="form-label">이벤트명</label>
+                                    <textarea class="form-control" id="updateStoreEventsNameForm"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="updateStoreEventsInfoForm" class="form-label">이벤트 설명</label>
+                                    <textarea class="form-control" id="updateStoreEventsInfoForm" rows="3"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="updateStoreEventsStartDateForm" class="form-label">시작일자</label>
+                                    <textarea class="form-control" id="updateStoreEventsStartDateForm"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="updateStoreEventsEndDateForm" class="form-label">종료일자</label>
+                                    <textarea class="form-control" id="updateStoreEventsEndDateForm"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                                <button type="button" class="btn btn-primary" onclick="doUpdateStoreEvents()">수정
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="deleteStoreEventsModal" tabindex="-1"
+                     aria-labelledby="deleteStoreEventsModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteStoreEventsModalLabel">이벤트 삭제하기</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="d-none" id="deleteStoreId"></div>
+                                <div class="d-none" id="deleteStoreEventsId"></div>
+                                <p>이벤트를 삭제하시겠습니까?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                                <button type="button" class="btn btn-primary" onclick="doDeleteStoreEvents()">삭제
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3 justify-content-center align-self-center">
+                <button type="button" class="col-4 btn btn-primary m-5" data-bs-toggle="modal"
+                        data-bs-target="#createStoreEventsModal">이벤트 등록하기
+                </button>
+                <div class="modal fade" id="createStoreEventsModal" tabindex="-1"
+                     aria-labelledby="createStoreEventsModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="createStoreEventsModalLabel">이벤트 등록하기</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <span class="visually-hidden" id="storeId">{{store.id}}</span>
+                                <div class="mb-3">
+                                    <label for="storeEventsNameForm" class="form-label">이벤트명</label>
+                                    <textarea class="form-control" id="storeEventsNameForm"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="storeEventsInfoForm" class="form-label">이벤트 설명</label>
+                                    <textarea class="form-control" id="storeEventsInfoForm" rows="3"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="storeEventsStartDateForm" class="form-label">시작일자</label>
+                                    <textarea class="form-control" id="storeEventsStartDateForm"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="storeEventsEndDateForm" class="form-label">종료일자</label>
+                                    <textarea class="form-control" id="storeEventsEndDateForm"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                                <button type="button" class="btn btn-primary" onclick="doCreateStoreEvents()">등록
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 </main>
 <script src="/js/storeEvents.js"></script>
