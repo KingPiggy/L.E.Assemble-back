@@ -21,10 +21,11 @@ function doCreateProduct(){
                 },
                 error:function(request, status, error){
                     alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                    console.log(request);
+                    console.log(status);
+                    console.log(error);
                 }
     });
-
-    location.href="/my-store/" + storeId + "/products";
 
     $("#createProductModal").modal('hide');
 }
