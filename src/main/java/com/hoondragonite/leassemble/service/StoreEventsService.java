@@ -3,9 +3,11 @@ package com.hoondragonite.leassemble.service;
 import com.hoondragonite.leassemble.domain.events.StoreEvents;
 import com.hoondragonite.leassemble.domain.events.StoreEventsRepository;
 import com.hoondragonite.leassemble.domain.product.Product;
+import com.hoondragonite.leassemble.domain.store.Store;
 import com.hoondragonite.leassemble.domain.store.StoreRepository;
 import com.hoondragonite.leassemble.web.dto.ProductResponseDto;
 import com.hoondragonite.leassemble.web.dto.StoreEventsResponseDto;
+import com.hoondragonite.leassemble.web.dto.StoreEventsSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,9 +37,19 @@ public class StoreEventsService {
     }
 
     @Transactional(readOnly = true)
-    public StoreEventsResponseDto findById(Long storeEventsId){
+    public StoreEventsResponseDto findById(Long storeEventsId) {
         StoreEvents storeEvents = storeEventsRepository.findById(storeEventsId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 이벤트는 없습니다. id = " + storeEventsId));
         return new StoreEventsResponseDto(storeEvents);
+    }
+
+    @Transactional
+    public Long save(StoreEventsSaveRequestDto dto, Long storeId) {
+        // DTO의 상점 정보 업데이트 후 저장
+        Store store = storeRepository.findById(storeId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 상점은 없습니다. id = " + storeId));
+        dto.setStore(store);
+
+        return storeEventsRepository.save(dto.toEntity()).getId();
     }
 }

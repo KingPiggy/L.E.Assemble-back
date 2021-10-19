@@ -2,14 +2,18 @@ package com.hoondragonite.leassemble.web;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.hoondragonite.leassemble.config.auth.dto.SessionUser;
 import com.hoondragonite.leassemble.domain.events.StoreEvents;
 import com.hoondragonite.leassemble.domain.events.StoreEventsRepository;
+import com.hoondragonite.leassemble.domain.product.Product;
 import com.hoondragonite.leassemble.domain.store.Store;
 import com.hoondragonite.leassemble.domain.store.StoreRepository;
 import com.hoondragonite.leassemble.domain.user.Role;
 import com.hoondragonite.leassemble.domain.user.User;
 import com.hoondragonite.leassemble.domain.user.UserRepository;
+import com.hoondragonite.leassemble.web.dto.StoreEventsSaveRequestDto;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,6 +21,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -146,5 +151,41 @@ public class StoreEventsApiControllerTest {
         mvc.perform(get(url).session(mockHttpSession))
                 .andDo(print())
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    @WithMockUser(roles = "USER")
+    public void 유저는_상점의_이벤트를_등록한다() throws Exception {
+        // given
+        User testUser = userRepository.findAll().get(0);
+        SessionUser sessionUser = new SessionUser(testUser);
+        Store testStore = storeRepository.findByOwnerUser_Id(sessionUser.getId()).get(0);
+        Long testStoreId = testStore.getId();
+
+        StoreEventsSaveRequestDto dto = StoreEventsSaveRequestDto.builder()
+                .name("이벤트")
+                .info("정보")
+                .startDate("2021-10-19")
+                .endDate("2021-10-19")
+                .build();
+
+        // when
+        String url = "http://localhost:" + port + "/api/user/stores/"
+                + testStore.getId().toString() + "/store-events";
+
+        // then
+        String dtoContent = new ObjectMapper()
+                .registerModule(new JavaTimeModule())
+                .writeValueAsString(dto);
+
+        mvc.perform(post(url)
+                        .session(mockHttpSession)
+                        .content(dtoContent)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        StoreEvents result = storeEventsRepository.findAll().get(0);
+        assertThat(result.getName()).isEqualTo("이벤트");
     }
 }
