@@ -6,5 +6,5 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface StoreEventsItemRepository extends JpaRepository<StoreEventsItem, Long> {
-    List<StoreEvents> findByStoreEvents_Id(@Param(value = "storeEventsId") Long storeEventsId);
+    List<StoreEventsItem> findByStoreEvents_Id(@Param(value = "storeEventsId") Long storeEventsId);
 }
