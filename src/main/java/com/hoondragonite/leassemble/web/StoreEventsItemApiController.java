@@ -2,11 +2,9 @@ package com.hoondragonite.leassemble.web;
 
 import com.hoondragonite.leassemble.service.StoreEventsItemService;
 import com.hoondragonite.leassemble.web.dto.StoreEventsItemResponseDto;
+import com.hoondragonite.leassemble.web.dto.StoreEventsItemSaveRequestDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +22,10 @@ public class StoreEventsItemApiController {
     @GetMapping("/store-events-items/{storeEventsItemId}")
     public StoreEventsItemResponseDto findStoreEventsItemById(@PathVariable Long storeEventsItemId){
         return storeEventsItemService.findById(storeEventsItemId);
+    }
+
+    @PostMapping("/store-events-items")
+    public void saveAllStoreEventsItem(@RequestBody List<StoreEventsItemSaveRequestDto> dtoList, @PathVariable Long storeEventsId){
+        storeEventsItemService.saveStoreEventsItem(dtoList, storeEventsId);
     }
 }

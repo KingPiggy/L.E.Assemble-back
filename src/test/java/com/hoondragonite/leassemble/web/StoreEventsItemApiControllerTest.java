@@ -1,5 +1,7 @@
 package com.hoondragonite.leassemble.web;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.hoondragonite.leassemble.domain.events.StoreEvents;
 import com.hoondragonite.leassemble.domain.events.StoreEventsItem;
 import com.hoondragonite.leassemble.domain.events.StoreEventsItemRepository;
@@ -9,6 +11,8 @@ import com.hoondragonite.leassemble.domain.store.StoreRepository;
 import com.hoondragonite.leassemble.domain.user.Role;
 import com.hoondragonite.leassemble.domain.user.User;
 import com.hoondragonite.leassemble.domain.user.UserRepository;
+import com.hoondragonite.leassemble.web.dto.StoreEventsItemSaveRequestDto;
+import com.hoondragonite.leassemble.web.dto.StoreEventsSaveRequestDto;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,6 +20,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -23,9 +28,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -160,4 +169,52 @@ public class StoreEventsItemApiControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk());
     }
+
+    @Test
+    @WithMockUser(roles = "USER")
+    public void 유저는_상점이벤트에_여러_이벤트상품을_등록한다() throws Exception {
+        Long storeId = storeRepository.findAll().get(0).getId();
+        Long storeEventsId = storeEventsRepository.findAll().get(0).getId();
+
+        List<StoreEventsItemSaveRequestDto> dtoList = new ArrayList<>();
+        dtoList.add(StoreEventsItemSaveRequestDto.builder()
+                .name("event item1")
+                .info("gd")
+                .qty(10)
+                .price(10000)
+                .build());
+        dtoList.add(StoreEventsItemSaveRequestDto.builder()
+                .name("event item2")
+                .info("gdgd")
+                .qty(20)
+                .price(20000)
+                .build());
+        dtoList.add(StoreEventsItemSaveRequestDto.builder()
+                .name("event item3")
+                .info("gdgdgd")
+                .qty(30)
+                .price(30000)
+                .build());
+
+        // when
+        String url = "http://localhost:" + port + "/api/user/stores/"
+                + storeId.toString() + "/store-events/" + storeEventsId.toString()
+                + "/store-events-items";
+
+        // then
+        String dtoContent = new ObjectMapper()
+                .registerModule(new JavaTimeModule())
+                .writeValueAsString(dtoList);
+
+        mvc.perform(post(url)
+                        .content(dtoContent)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        System.out.println(">>>>>>>>>>>>>>>>");
+        System.out.println(storeEventsItemRepository.findAll().size());
+    }
+
+
 }

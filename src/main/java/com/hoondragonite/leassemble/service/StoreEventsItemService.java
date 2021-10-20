@@ -5,6 +5,7 @@ import com.hoondragonite.leassemble.domain.events.StoreEventsItem;
 import com.hoondragonite.leassemble.domain.events.StoreEventsItemRepository;
 import com.hoondragonite.leassemble.domain.events.StoreEventsRepository;
 import com.hoondragonite.leassemble.web.dto.StoreEventsItemResponseDto;
+import com.hoondragonite.leassemble.web.dto.StoreEventsItemSaveRequestDto;
 import com.hoondragonite.leassemble.web.dto.StoreEventsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,19 @@ public class StoreEventsItemService {
         StoreEventsItem storeEventsItem = storeEventsItemRepository.findById(storeEventsItemId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 이벤트 상품은 없습니다. id = " + storeEventsItemId));
         return new StoreEventsItemResponseDto(storeEventsItem);
+    }
+
+    @Transactional
+    public void saveStoreEventsItem(List<StoreEventsItemSaveRequestDto> dtoList, Long storeEventsId){
+        StoreEvents storeEvents = storeEventsRepository.findById(storeEventsId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 이벤트는 없습니다. id = " + storeEventsId));
+
+        List<StoreEventsItem> storeEventsItems = new ArrayList<>();
+        for (StoreEventsItemSaveRequestDto d : dtoList){
+            d.setStoreEvents(storeEvents);
+            storeEventsItems.add(d.toEntity());
+        }
+
+        storeEventsItemRepository.saveAll(storeEventsItems);
     }
 }
