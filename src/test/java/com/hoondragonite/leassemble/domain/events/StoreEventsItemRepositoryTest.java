@@ -1,7 +1,5 @@
 package com.hoondragonite.leassemble.domain.events;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.hoondragonite.leassemble.domain.store.Store;
 import com.hoondragonite.leassemble.domain.store.StoreRepository;
 import com.hoondragonite.leassemble.domain.user.Role;
@@ -15,12 +13,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class StoreEventsRepositoryTest {
+public class StoreEventsItemRepositoryTest {
+
+    @Autowired
+    StoreEventsItemRepository storeEventsItemRepository;
+
     @Autowired
     StoreEventsRepository storeEventsRepository;
 
@@ -32,6 +34,7 @@ public class StoreEventsRepositoryTest {
 
     @After
     public void cleanUp() {
+        storeEventsItemRepository.deleteAll();
         storeEventsRepository.deleteAll();
         storeRepository.deleteAll();
         userRepository.deleteAll();
@@ -58,7 +61,7 @@ public class StoreEventsRepositoryTest {
     }
 
     @Test
-    public void 이벤트_생성후_불러오기() {
+    public void 이벤트아이템_생성후_불러오기() {
         // given
         Store store = storeRepository.findAll().get(0);
 
@@ -70,10 +73,20 @@ public class StoreEventsRepositoryTest {
                 .store(store)
                 .build());
 
-        // when
         StoreEvents storeEvents = storeEventsRepository.findAll().get(0);
 
+        storeEventsItemRepository.save(StoreEventsItem.builder()
+                .name("이벤상품1")
+                .info("ㅎㅎ")
+                .qty(10)
+                .price(10000)
+                .storeEvents(storeEvents)
+                .build());
+
+        // when
+        StoreEventsItem storeEventsItem = storeEventsItemRepository.findAll().get(0);
+
         // then
-        assertThat(storeEvents.getName()).isEqualTo("이벤트");
+        assertThat(storeEventsItem.getName()).isEqualTo("이벤상품1");
     }
 }
