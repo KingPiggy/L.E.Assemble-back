@@ -1,6 +1,7 @@
 package com.hoondragonite.leassemble.domain.events;
 
 import com.hoondragonite.leassemble.domain.BaseTimeEntity;
+import com.hoondragonite.leassemble.web.dto.StoreEventsItemUpdateRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,4 +42,10 @@ public class StoreEventsItem extends BaseTimeEntity {
         this.storeEvents = storeEvents;
     }
 
+    public void update(StoreEventsItemUpdateRequestDto dto){
+        this.name = dto.getName();
+        this.info = dto.getInfo();
+        this.qty = dto.getQty();
+        this.price = dto.getPrice();
+    }
 }

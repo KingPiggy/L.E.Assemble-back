@@ -6,6 +6,7 @@ import com.hoondragonite.leassemble.domain.events.StoreEventsItemRepository;
 import com.hoondragonite.leassemble.domain.events.StoreEventsRepository;
 import com.hoondragonite.leassemble.web.dto.StoreEventsItemResponseDto;
 import com.hoondragonite.leassemble.web.dto.StoreEventsItemSaveRequestDto;
+import com.hoondragonite.leassemble.web.dto.StoreEventsItemUpdateRequestDto;
 import com.hoondragonite.leassemble.web.dto.StoreEventsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -52,5 +53,20 @@ public class StoreEventsItemService {
         }
 
         storeEventsItemRepository.saveAll(storeEventsItems);
+    }
+
+    @Transactional
+    public Long updateStoreEventsItem(Long storeEventsItemId, StoreEventsItemUpdateRequestDto dto){
+        StoreEventsItem storeEventsItem = storeEventsItemRepository.findById(storeEventsItemId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 이벤트상품은 없습니다. id = " + storeEventsItemId));
+        storeEventsItem.update(dto);
+        return storeEventsItemId;
+    }
+
+    @Transactional
+    public void deleteStoreEventsItem(Long storeEventsItemId){
+        StoreEventsItem storeEventsItem = storeEventsItemRepository.findById(storeEventsItemId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 이벤트상품은 없습니다. id = " + storeEventsItemId));
+        storeEventsItemRepository.delete(storeEventsItem);
     }
 }

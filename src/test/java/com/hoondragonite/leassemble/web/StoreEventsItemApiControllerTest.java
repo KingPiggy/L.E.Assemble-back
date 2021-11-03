@@ -12,6 +12,7 @@ import com.hoondragonite.leassemble.domain.user.Role;
 import com.hoondragonite.leassemble.domain.user.User;
 import com.hoondragonite.leassemble.domain.user.UserRepository;
 import com.hoondragonite.leassemble.web.dto.StoreEventsItemSaveRequestDto;
+import com.hoondragonite.leassemble.web.dto.StoreEventsItemUpdateRequestDto;
 import com.hoondragonite.leassemble.web.dto.StoreEventsSaveRequestDto;
 import org.junit.After;
 import org.junit.Before;
@@ -31,10 +32,10 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -216,5 +217,46 @@ public class StoreEventsItemApiControllerTest {
         System.out.println(storeEventsItemRepository.findAll().size());
     }
 
+    @Test
+    @WithMockUser(roles = "USER")
+    public void 상점이벤트의_이벤트상품_하나를_수정한다() throws Exception {
+        Long storeId = storeRepository.findAll().get(0).getId();
 
+        StoreEvents storeEvents = storeEventsRepository.findAll().get(0);
+        Long storeEventsId = storeEvents.getId();
+
+        Long toUpdateStoreEventsItemId = storeEventsItemRepository.save(StoreEventsItem.builder()
+                .name("이벤트 상품1")
+                .info("gd")
+                .qty(10)
+                .price(10000)
+                .storeEvents(storeEvents)
+                .build()).getId();
+
+        StoreEventsItemUpdateRequestDto dto = StoreEventsItemUpdateRequestDto.builder()
+                .name("수정된 상품")
+                .info("정보")
+                .price(20000)
+                .qty(20)
+                .build();
+
+        // when
+        String url = "http://localhost:" + port + "/api/user/stores/"
+                + storeId.toString() + "/store-events/" + storeEventsId.toString()
+                + "/store-events-items/" + toUpdateStoreEventsItemId.toString();
+
+        String dtoContent = new ObjectMapper()
+                .registerModule(new JavaTimeModule())
+                .writeValueAsString(dto);
+
+        // then
+        mvc.perform(put(url)
+                        .content(dtoContent)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        StoreEventsItem result = storeEventsItemRepository.findAll().get(0);
+        assertThat(result.getName()).isEqualTo("수정된 상품");
+    }
 }
