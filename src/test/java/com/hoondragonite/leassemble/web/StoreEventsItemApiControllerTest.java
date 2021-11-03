@@ -259,4 +259,33 @@ public class StoreEventsItemApiControllerTest {
         StoreEventsItem result = storeEventsItemRepository.findAll().get(0);
         assertThat(result.getName()).isEqualTo("수정된 상품");
     }
+
+    @Test
+    @WithMockUser(roles = "USER")
+    public void 상점이벤트의_이벤트상품_하나를_삭제한다() throws Exception {
+        Long storeId = storeRepository.findAll().get(0).getId();
+
+        StoreEvents storeEvents = storeEventsRepository.findAll().get(0);
+        Long storeEventsId = storeEvents.getId();
+
+        Long toDeleteStoreEventsItemId = storeEventsItemRepository.save(StoreEventsItem.builder()
+                .name("이벤트 상품1")
+                .info("gd")
+                .qty(10)
+                .price(10000)
+                .storeEvents(storeEvents)
+                .build()).getId();
+
+        // when
+        String url = "http://localhost:" + port + "/api/user/stores/"
+                + storeId.toString() + "/store-events/" + storeEventsId.toString()
+                + "/store-events-items/" + toDeleteStoreEventsItemId.toString();
+
+        // then
+        mvc.perform(delete(url))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        assertThat(storeEventsItemRepository.count()).isEqualTo(0);
+    }
 }
