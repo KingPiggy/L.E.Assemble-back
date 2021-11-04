@@ -27,7 +27,7 @@
 2. [MockMvc를 이용한 Unit Test](https://github.com/KingPiggy/L.E.Assemble-back/blob/master/src/test/java/com/hoondragonite/leassemble/web/StoreApiControllerTest.java)
 
 ## 프로젝트 구조
-![프로젝트 구조](/assets/project_structure.png)
+![project_structure](https://user-images.githubusercontent.com/37856794/140293864-7a3b81a2-8067-4482-9eb1-0c041eb497c3.png)
 
 ## 기술스택
 
@@ -43,9 +43,8 @@
 |Test|JUnit5, NGrinder(아직 미사용)|
 |ETC|Kakao Oven, ERWin|
 
-## ERD
-그림 추가
-초안 ERD입니다.
+## ERD 초안
+![erd](https://user-images.githubusercontent.com/37856794/140293902-4007614b-7477-4386-bd88-4a85589e873a.png)
 
 ## 프로젝트 팀원
 KingPiggy
