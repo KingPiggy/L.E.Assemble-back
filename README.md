@@ -7,7 +7,7 @@
 **Done**
 1. JPA를 사용한 일대일, 일대다 관계의 조회/저장/수정/삭제 구현
 2. RESTful API 설계
-3. MockMvc를 이용한 Controller, Service, Repository 에 대한 단위 테스트 코드 작성(라우팅, 기능구현)
+3. JUnit5를 이용한 Controller, Service, Repository의 단위 테스트 코드 작성(라우팅, 기능구현)
 4. AWS 인프라 구성 
 5. CI/CD 구성 (Travis CI, AWS CodeDeploy, AWS S3, Nginx)
 6. OAuth2를 이용한 소셜로그인(구글, 카카오)
@@ -27,7 +27,7 @@
 2. [MockMvc를 이용한 Unit Test](https://github.com/KingPiggy/L.E.Assemble-back/blob/master/src/test/java/com/hoondragonite/leassemble/web/StoreApiControllerTest.java)
 
 ## 프로젝트 구조
-![project_structure](https://user-images.githubusercontent.com/37856794/140293864-7a3b81a2-8067-4482-9eb1-0c041eb497c3.png){: width="50%" height="50%"}
+![project_structure](https://user-images.githubusercontent.com/37856794/140293864-7a3b81a2-8067-4482-9eb1-0c041eb497c3.png)
 
 1. Code Push
 2. Travis CI
