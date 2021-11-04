@@ -29,6 +29,16 @@
 ## 프로젝트 구조
 ![project_structure](https://user-images.githubusercontent.com/37856794/140293864-7a3b81a2-8067-4482-9eb1-0c041eb497c3.png)
 
+1. Code Push
+2. Travis CI
+   1. 프로젝트 빌드, 빌드한 파일을 AWS S3에 전송
+   2. AWS CodeDeploy에 배포 명령
+3. AWS CodeDeploy
+   1. AWS S3에서 배포파일을 가져옴
+   2. EC2로 배포
+4. EC2, Nginx
+   1. 배포 스크립트에 따라 두 개의 App에 차례로 배포
+
 ## 기술스택
 
 |구분|내용|
