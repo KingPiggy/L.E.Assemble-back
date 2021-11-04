@@ -27,7 +27,7 @@
 2. [MockMvc를 이용한 Unit Test](https://github.com/KingPiggy/L.E.Assemble-back/blob/master/src/test/java/com/hoondragonite/leassemble/web/StoreApiControllerTest.java)
 
 ## 프로젝트 구조
-![project_structure](https://user-images.githubusercontent.com/37856794/140293864-7a3b81a2-8067-4482-9eb1-0c041eb497c3.png)
+![project_structure](https://user-images.githubusercontent.com/37856794/140293864-7a3b81a2-8067-4482-9eb1-0c041eb497c3.png){: width="50%" height="50%"}
 
 1. Code Push
 2. Travis CI
@@ -43,14 +43,14 @@
 
 |구분|내용|
 |---|---|
-|Client|Mustache|
+|Template Engine|Mustache|
 |API Server|Spring Boot 2.5.0|
-|DB|AWS RDS(MariaDB), AWS ElasticSearch(Redis Cache)|
+|DB|AWS RDS(MariaDB)|
 |Build|Gradle|
 |CI/CD|Github, Travis CI, AWS S3, AWS CodeDeploy, Shell Script|
-|Infra|AWS EC2, nginx(load balancing, reverse proxy)|
+|Infra|AWS EC2, nginx|
 |Storage|AWS S3|
-|Test|JUnit5, NGrinder(아직 미사용)|
+|Test|JUnit5|
 |ETC|Kakao Oven, ERWin|
 
 ## ERD 초안
